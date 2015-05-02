@@ -1,3 +1,5 @@
+package project;
+
 
 import java.util.List;
 
@@ -11,25 +13,25 @@ import java.util.List;
  *
  * @author marek
  */
-public class SubjectManagerImpl implements SubjectManager{
+public class AccountManagerImpl implements AccountManager{
 
     @Override
-    public void createSubject(Subject subject) {
+    public void createAccount(Account account) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateSubject(Subject subject) {
+    public void updateAccount(Account account) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteSubject(Long id) {
+    public void deleteAccount(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Subject> getSubject(Long id) {
+    public List<Account> getAccount(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
