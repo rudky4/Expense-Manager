@@ -21,5 +21,7 @@ public interface SubjectManager {
 
     public void deleteSubject(Long id);
 
-    public List<Subject> getSubject(Long id);
+    public Subject getSubjectById(Long id);
+    
+    public Subject getSubjectByName(String name);
 }
