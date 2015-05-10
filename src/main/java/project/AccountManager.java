@@ -21,7 +21,9 @@ public interface AccountManager {
 
     public void deleteAccount(Long id);
 
-    public Account getAccount(Long id);
+    public Account getAccountById(Long id);
+    
+    public Account getAccountByName(String name);
     
     public List<Account> findAllAccounts();
 }

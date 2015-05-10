@@ -82,14 +82,14 @@ public class AccountManagerImplTest {
         manager.createAccount(account2);
         Long accountId = account1.getId();
         
-        account1 = manager.getAccount(accountId);
+        account1 = manager.getAccountById(accountId);
         account1.setName("Bank");
         account1.setDescription("Description");
         manager.updateAccount(account1);
         assertEquals("Bank", account1.getName());
         assertEquals("Description", account1.getDescription());
         
-        assertDeepEquals(account2, manager.getAccount(account2.getId()));
+        assertDeepEquals(account2, manager.getAccountById(account2.getId()));
     }
 
     /**
@@ -130,7 +130,7 @@ public class AccountManagerImplTest {
         List<Account> list = new ArrayList<>();
         list.add(account);
         Account result = list.get(0);
-        Account accountById = manager.getAccount(id);
+        Account accountById = manager.getAccountById(id);
         assertEquals(accountById.getId(), result.getId());
         assertEquals(accountById.getName(), result.getName());
     }
