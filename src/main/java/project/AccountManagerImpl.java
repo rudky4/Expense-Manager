@@ -31,7 +31,12 @@ public class AccountManagerImpl implements AccountManager{
     }
 
     @Override
-    public List<Account> getAccount(Long id) {
+    public Account getAccount(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List<Account> findAllAccounts() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

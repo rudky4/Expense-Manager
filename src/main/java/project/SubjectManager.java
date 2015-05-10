@@ -24,4 +24,6 @@ public interface SubjectManager {
     public Subject getSubjectById(Long id);
     
     public Subject getSubjectByName(String name);
+    
+    public List<Subject> findAllSubjects();
 }

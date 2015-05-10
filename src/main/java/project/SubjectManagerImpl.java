@@ -2,6 +2,7 @@ package project;
 
 
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.xmldb.api.DatabaseManager;
@@ -201,5 +202,9 @@ public class SubjectManagerImpl implements SubjectManager {
         }
         return subject;
     }
-
+    
+    @Override
+    public List<Subject> findAllSubjects() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
