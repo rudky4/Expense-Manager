@@ -90,8 +90,8 @@ public class SubjectManagerImplTest {
         manager.createSubject(subject2);
         manager.createSubject(subject3);
         
-        Long subjectId = subject1.getId();
-        manager.deleteSubject(subjectId);
+       Long subjectId = subject1.getId();
+       manager.deleteSubject(subjectId);       
         
         List<Subject> result = manager.findAllSubjects();
         List<Subject> expectedResult = new ArrayList<>();
@@ -142,10 +142,10 @@ public class SubjectManagerImplTest {
         
         Subject result1 = new Subject();
         Subject result2 = new Subject();
-        result1 = manager.getSubjectByName(name1);
-        result2 = manager.getSubjectByName(name2);
-        assertEquals(result1, subject1);
-        assertEquals(result2, subject2);
+        result1 = manager.getSubjectByName(name1);        
+        result2 = manager.getSubjectByName(name2);              
+        assertEquals(subject1, result1);
+        assertEquals(subject2, result2);
     }
     
     private static Subject newSubject(String name) {
