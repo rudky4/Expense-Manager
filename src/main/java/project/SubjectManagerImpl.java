@@ -1,10 +1,19 @@
 package project;
 
-
-
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.CompiledExpression;
@@ -52,7 +61,7 @@ public class SubjectManagerImpl implements SubjectManager {
             res.setContent("<subjects></subjects>");
             col.storeResource(res);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
-            logger.log(Level.SEVERE, "Error when creating databse",ex);
+            logger.log(Level.SEVERE, "Error when creating databse", ex);
         }
     }
 
@@ -76,7 +85,7 @@ public class SubjectManagerImpl implements SubjectManager {
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
         } catch (NumberFormatException | XMLDBException ex) {
-            logger.log(Level.SEVERE, "Error when creating subject",ex);
+            logger.log(Level.SEVERE, "Error when creating subject", ex);
         }
 
     }
@@ -100,7 +109,7 @@ public class SubjectManagerImpl implements SubjectManager {
                 }
             }
         } catch (XMLDBException | IllegalArgumentException ex) {
-            logger.log(Level.SEVERE, "Error when geting id",ex);
+            logger.log(Level.SEVERE, "Error when geting id", ex);
         }
         return id;
     }
@@ -129,7 +138,7 @@ public class SubjectManagerImpl implements SubjectManager {
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
         } catch (XMLDBException ex) {
-            logger.log(Level.SEVERE,"Error when updating subject",ex);
+            logger.log(Level.SEVERE, "Error when updating subject", ex);
         }
     }
 
@@ -143,7 +152,7 @@ public class SubjectManagerImpl implements SubjectManager {
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
         } catch (XMLDBException ex) {
-            logger.log(Level.SEVERE,"Error when delete subject",ex);
+            logger.log(Level.SEVERE, "Error when delete subject", ex);
         }
     }
 
@@ -152,8 +161,12 @@ public class SubjectManagerImpl implements SubjectManager {
         if (id == null) {
             throw new IllegalArgumentException("");
         }
-        String where = "@id=" + Long.toString(id);
-        return getSubject(where);
+        String where = "where @id=" + Long.toString(id);
+        List<Subject> result = findSubjectsBy(where);
+        if (result.size() != 1) {
+            throw new IllegalArgumentException();
+        }
+        return result.get(0);
     }
 
     @Override
@@ -161,50 +174,70 @@ public class SubjectManagerImpl implements SubjectManager {
         if (name == null) {
             throw new IllegalArgumentException("");
         }
-        String where = "name=" + "\"" + name + "\"";
-        return getSubject(where);
+        String where = "where name=" + "\"" + name + "\"";
+        List<Subject> result = findSubjectsBy(where);
+        if (result.size() != 1) {
+            throw new IllegalArgumentException();
+        }
+        return result.get(0);
     }
 
-    private Subject getSubject(String where) {
-        Subject subject = new Subject();
-        try {
-            String queryStart = "for $subject in doc(\"subjects.xml\")//subject where ";
-            String queryEnd = " return data($subject/";
+    @Override
+    public List<Subject> findAllSubjects() {
+        String where = "";
+        return findSubjectsBy(where);
+    }
 
+    private List<Subject> findSubjectsBy(String where) {
+        List<Subject> resultList = new ArrayList<>();
+        try {
+            String queryStart = "for $subject in doc(\"subjects.xml\")//subject ";
+            String queryEnd = " return $subject";
+            String query = queryStart + where + queryEnd;
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/subjects.xml");
             service.setProperty("indent", "yes");
-            CompiledExpression compiled = service.compile(queryStart + where + queryEnd + "@id)");
-            ResourceSet resultId = service.execute(compiled);
-            ResourceIterator riId = resultId.getIterator();
-            if (riId.hasMoreResources()) {
-                Resource resource = riId.nextResource();
-                Long rId = Long.parseLong(resource.getContent().toString());
-                subject.setId(rId);
-                if (riId.hasMoreResources()) {
-                    throw new IllegalArgumentException("");
-                }
-            }
+            CompiledExpression compiled = service.compile(query);
 
-            compiled = service.compile(queryStart + where + queryEnd + "name)");
-            ResourceSet resultName = service.execute(compiled);
-            ResourceIterator riName = resultName.getIterator();
-            if (riName.hasMoreResources()) {
-                Resource resource = riName.nextResource();
-                String rName = resource.getContent().toString();
-                subject.setName(rName);
-                if (riName.hasMoreResources()) {
-                    throw new IllegalArgumentException("");
-                }
+            ResourceSet result = service.execute(compiled);
+            ResourceIterator it = result.getIterator();
+            while (it.hasMoreResources()) {
+                Resource resource = it.nextResource();
+                resultList.add(parseSubjectFromXML(resource.getContent().toString()));
             }
         } catch (XMLDBException ex) {
-            logger.log(Level.SEVERE,"Error when geting subject",ex);
+
+        }
+        return resultList;
+    }
+
+    private Subject parseSubjectFromXML(String xml) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = null;
+        Subject subject = new Subject();
+        try {
+            db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xml));
+            try {
+
+                Document doc = db.parse(is);
+                NodeList a = doc.getElementsByTagName("subject");
+                Element parent = (Element) a.item(0);
+                subject.setId(Long.parseLong(parent.getAttribute("id")));
+
+                a = parent.getElementsByTagName("name");
+                if (a.getLength() != 1) {
+                    
+                }
+                Element el = (Element) a.item(0);
+                subject.setName(el.getTextContent());
+            } catch (SAXException | IOException ex) {
+                Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return subject;
-    }
-    
-    @Override
-    public List<Subject> findAllSubjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
