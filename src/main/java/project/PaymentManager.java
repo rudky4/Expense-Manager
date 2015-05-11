@@ -20,5 +20,7 @@ public interface PaymentManager {
 
     public void deletePayment(Long id);
 
-    public List<Payment> getPayment(Long id);
+    public Payment getPaymentById(Long id);
+    
+    public List<Payment> findAllPayments();
 }
