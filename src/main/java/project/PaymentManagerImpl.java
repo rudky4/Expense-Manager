@@ -50,7 +50,16 @@ public class PaymentManagerImpl implements PaymentManager {
     private Collection col = null;
     private XMLResource res = null;
 
+    public PaymentManagerImpl(String URI) {
+        this.URI = URI;
+        createDatabase();
+    }
+
     public PaymentManagerImpl() {
+        createDatabase();
+    }
+
+    private void createDatabase() {
         try {
             Class c = Class.forName(DRIVER);
             Database database = (Database) c.newInstance();
@@ -58,29 +67,32 @@ public class PaymentManagerImpl implements PaymentManager {
             DatabaseManager.registerDatabase(database);
             Collection parent = DatabaseManager.getCollection(URI, "admin", "admin");
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-            mgt.createCollection("payments");
+            mgt.createCollection("expenseManager");
             parent.close();
-            col = DatabaseManager.getCollection(URI + "payments", "admin", "admin");
-            res = (XMLResource) col.createResource("payments.xml", "XMLResource");
-            res.setContent("<payments></payments>");
-            col.storeResource(res);
+            col = DatabaseManager.getCollection(URI + "expenseManager", "admin", "admin");
+            Resource x = col.getResource("payments.xml");
+            if (x == null) {
+                res = (XMLResource) col.createResource("payments.xml", "XMLResource");
+                res.setContent("<payments></payments>");
+                col.storeResource(res);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
         }
     }
-    
+
     @Override
     public void createPayment(Payment payment) {
         if (payment.getId() != null) {
             throw new IllegalArgumentException("id must be null");
         }
-        if (payment.getDescription()== null) {
+        if (payment.getDescription() == null) {
             throw new IllegalArgumentException("description cannot be null");
         }
-        if(payment.getDate() == null){
+        if (payment.getDate() == null) {
             throw new IllegalArgumentException("date cannot be null");
         }
-        if(payment.getAmount() == null){
+        if (payment.getAmount() == null) {
             throw new IllegalArgumentException("amount cannot be null");
         }
         try {
@@ -89,22 +101,25 @@ public class PaymentManagerImpl implements PaymentManager {
             payment.setId(id);
             String node = getNode(payment);
             String query = "update insert " + node + " into doc(\"payments.xml\")//payments";
-            org.xmldb.api.modules.XQueryService service = (org.xmldb.api.modules.XQueryService) col.getService("XQueryService", "1.0");
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/payments.xml");
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+           // XPathQueryService service = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+           // service.setProperty("indent", "yes");
+           // service.query(query);
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating payment", ex);
         }
 
     }
-    
+
     private Long getId() {
         Long id = (long) 1;
         String idQuery = "max(for $payment in doc(\"payments.xml\")//payment return $payment/@id)";
         try {
-            org.xmldb.api.modules.XQueryService service = (org.xmldb.api.modules.XQueryService) col.getService("XQueryService", "1.0");
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/payments.xml");
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(idQuery);
@@ -126,27 +141,29 @@ public class PaymentManagerImpl implements PaymentManager {
 
     private String getNode(Payment payment) {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         String node = "<payment id=\"" + payment.getId() + "\">"
                 + "<description>" + payment.getDescription() + "</description>"
                 + "<date>" + dateF.format(payment.getDate()) + "</date>"
                 + "<amount>" + payment.getAmount() + "</amount>"
+              //  + "<account-id></account-id>"
+              //  + "<subject-id></subject-id>"
                 + "</payment>";
         return node;
     }
 
     @Override
     public void upradtePayment(Payment payment) {
-        if(payment.getId() == null) {
+        if (payment.getId() == null) {
             throw new IllegalArgumentException("id cannot be null");
         }
-        if(payment.getDescription()== null) {
+        if (payment.getDescription() == null) {
             throw new IllegalArgumentException("description cannot be null");
         }
-        if(payment.getDate() == null){
+        if (payment.getDate() == null) {
             throw new IllegalArgumentException("date cannot be null");
         }
-        if(payment.getAmount() == null){
+        if (payment.getAmount() == null) {
             throw new IllegalArgumentException("amount cannot be null");
         }
         try {
@@ -188,13 +205,13 @@ public class PaymentManagerImpl implements PaymentManager {
         }
         return result.get(0);
     }
-    
+
     @Override
     public List<Payment> findAllPayments() {
         String where = "";
         return findPaymentsBy(where);
     }
-    
+
     private List<Payment> findPaymentsBy(String where) {
         List<Payment> resultList = new ArrayList<>();
         try {
@@ -217,7 +234,7 @@ public class PaymentManagerImpl implements PaymentManager {
         }
         return resultList;
     }
-    
+
     private Payment parsePaymentFromXML(String xml) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
@@ -232,14 +249,14 @@ public class PaymentManagerImpl implements PaymentManager {
                 NodeList a = doc.getElementsByTagName("payment");
                 Element parent = (Element) a.item(0);
                 payment.setId(Long.parseLong(parent.getAttribute("id")));
-                
+
                 a = parent.getElementsByTagName("description");
                 if (a.getLength() != 1) {
                     // throw new Exception
                 }
                 Element el = (Element) a.item(0);
                 payment.setDescription(el.getTextContent());
-                
+
                 a = parent.getElementsByTagName("date");
                 if (a.getLength() != 1) {
                     // throw new Exception
@@ -247,7 +264,7 @@ public class PaymentManagerImpl implements PaymentManager {
                 el = (Element) a.item(0);
                 DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
                 payment.setDate(dateF.parse(el.getTextContent()));
-                
+
                 a = parent.getElementsByTagName("amount");
                 if (a.getLength() != 1) {
                     // throw new Exception

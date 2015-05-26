@@ -41,12 +41,20 @@ public class SubjectManagerImpl implements SubjectManager {
     private static final Logger logger = Logger.getLogger(SubjectManagerImpl.class.getName());
 
     private static final String DRIVER = "org.exist.xmldb.DatabaseImpl";
-    private static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/";
+    private String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/";
     private XPathQueryService xpqs;
     private Collection col = null;
     private XMLResource res = null;
 
+    public SubjectManagerImpl(String URI){
+        this.URI = URI;
+        createDatabase();
+    }
+    
     public SubjectManagerImpl() {
+        createDatabase();
+    }
+    private void createDatabase(){
         try {
             Class c = Class.forName(DRIVER);
             Database database = (Database) c.newInstance();
@@ -54,12 +62,15 @@ public class SubjectManagerImpl implements SubjectManager {
             DatabaseManager.registerDatabase(database);
             Collection parent = DatabaseManager.getCollection(URI, "admin", "admin");
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-            mgt.createCollection("subjects");
+            mgt.createCollection("expenseManager");
             parent.close();
-            col = DatabaseManager.getCollection(URI + "subjects", "admin", "admin");
-            res = (XMLResource) col.createResource("subjects.xml", "XMLResource");
-            res.setContent("<subjects></subjects>");
-            col.storeResource(res);
+            col = DatabaseManager.getCollection(URI + "expenseManager", "admin", "admin");
+            Resource x = col.getResource("subjects.xml");
+            if (x == null) {
+                res = (XMLResource) col.createResource("subjects.xml", "XMLResource");
+                res.setContent("<subjects></subjects>");
+                col.storeResource(res);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
         }
@@ -79,11 +90,14 @@ public class SubjectManagerImpl implements SubjectManager {
             subject.setId(id);
             String node = getNode(subject);
             String query = "update insert " + node + " into doc(\"subjects.xml\")//subjects";
-            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
-            service.declareVariable("document", "/db/subjects.xml");
+//            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+//            service.declareVariable("document", "/db/subjects.xml");
+//            service.setProperty("indent", "yes");
+//            CompiledExpression compiled = service.compile(query);
+//            service.execute(compiled);
+            XPathQueryService service = (XPathQueryService) col.getService("XPathQueryService", "1.0");
             service.setProperty("indent", "yes");
-            CompiledExpression compiled = service.compile(query);
-            service.execute(compiled);
+            service.query(query);
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating subject", ex);
         }
@@ -228,7 +242,7 @@ public class SubjectManagerImpl implements SubjectManager {
 
                 a = parent.getElementsByTagName("name");
                 if (a.getLength() != 1) {
-                    
+
                 }
                 Element el = (Element) a.item(0);
                 subject.setName(el.getTextContent());

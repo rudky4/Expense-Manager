@@ -49,7 +49,16 @@ public class AccountManagerImpl implements AccountManager {
     private Collection col = null;
     private XMLResource res = null;
 
+    public AccountManagerImpl(String URI) {
+        this.URI = URI;
+        createDatabase();
+    }
+
     public AccountManagerImpl() {
+        createDatabase();
+    }
+
+    private void createDatabase() {
         try {
             Class c = Class.forName(DRIVER);
             Database database = (Database) c.newInstance();
@@ -57,12 +66,15 @@ public class AccountManagerImpl implements AccountManager {
             DatabaseManager.registerDatabase(database);
             Collection parent = DatabaseManager.getCollection(URI, "admin", "admin");
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-            mgt.createCollection("accounts");
+            mgt.createCollection("expenseManager");
             parent.close();
-            col = DatabaseManager.getCollection(URI + "accounts", "admin", "admin");
-            res = (XMLResource) col.createResource("accounts.xml", "XMLResource");
-            res.setContent("<accounts></accounts>");
-            col.storeResource(res);
+            col = DatabaseManager.getCollection(URI + "expenseManager", "admin", "admin");
+            Resource x = col.getResource("accounts.xml");
+            if (x == null) {
+                res = (XMLResource) col.createResource("accounts.xml", "XMLResource");
+                res.setContent("<accounts></accounts>");
+                col.storeResource(res);
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
         }
@@ -190,9 +202,9 @@ public class AccountManagerImpl implements AccountManager {
         }
         return result.get(0);
     }
-    
+
     @Override
-    public Account getAccountByName(String name){
+    public Account getAccountByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("");
         }
@@ -209,7 +221,7 @@ public class AccountManagerImpl implements AccountManager {
         String where = "";
         return findAccountsBy(where);
     }
-    
+
     private List<Account> findAccountsBy(String where) {
         List<Account> resultList = new ArrayList<>();
         try {
@@ -232,7 +244,7 @@ public class AccountManagerImpl implements AccountManager {
         }
         return resultList;
     }
-    
+
     private Account parseAccountFromXML(String xml) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
@@ -254,14 +266,14 @@ public class AccountManagerImpl implements AccountManager {
                 }
                 Element el = (Element) a.item(0);
                 account.setName(el.getTextContent());
-                
+
                 a = parent.getElementsByTagName("description");
                 if (a.getLength() != 1) {
                     // throw new Exception
                 }
                 el = (Element) a.item(0);
                 account.setDescription(el.getTextContent());
-                
+
                 a = parent.getElementsByTagName("creationDate");
                 if (a.getLength() != 1) {
                     // throw new Exception
