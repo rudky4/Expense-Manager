@@ -146,14 +146,15 @@ public class PaymentManagerImpl implements PaymentManager {
                 + "<description>" + payment.getDescription() + "</description>"
                 + "<date>" + dateF.format(payment.getDate()) + "</date>"
                 + "<amount>" + payment.getAmount() + "</amount>"
-              //  + "<account-id></account-id>"
-              //  + "<subject-id></subject-id>"
+                + "<account-id>" + payment.getAcountId().toString() + "</account-id>"
+                + "<subject-id>" + payment.getSubjectId().toString() + "</subject-id>"
+                + "<category-id>" + payment.getCategoryId().toString() + "/<category-id>"
                 + "</payment>";
         return node;
     }
 
     @Override
-    public void upradtePayment(Payment payment) {
+    public void updatePayment(Payment payment) {
         if (payment.getId() == null) {
             throw new IllegalArgumentException("id cannot be null");
         }

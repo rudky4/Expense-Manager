@@ -16,7 +16,7 @@ public interface PaymentManager {
 
     public void createPayment(Payment payment);
 
-    public void upradtePayment(Payment payment);
+    public void updatePayment(Payment payment);
 
     public void deletePayment(Long id);
 

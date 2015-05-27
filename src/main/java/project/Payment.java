@@ -5,8 +5,6 @@ package project;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,6 +18,9 @@ public class Payment {
     private String description;
     private Date date;
     private BigDecimal amount;
+    private Long accountId;
+    private Long subjectId;
+    private Long categoryId;
 
     /**
      * @return the id
@@ -77,8 +78,51 @@ public class Payment {
         this.amount = amount;
     }
 
+    /**
+     * @return the acountId
+     */
+    public Long getAcountId() {
+        return accountId;
+    }
+
+    /**
+     * @param acountId the acountId to set
+     */
+    public void setAcountId(Long acountId) {
+        this.accountId = acountId;
+    }
+
+    /**
+     * @return the subjectId
+     */
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    /**
+     * @param subjectId the subjectId to set
+     */
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    /**
+     * @return the categoryId
+     */
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    /**
+     * @param categoryId the categoryId to set
+     */
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
     @Override
     public String toString() {
         return id + ": " + date + " " + amount;
     }
+
 }

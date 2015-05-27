@@ -20,6 +20,7 @@ public class Account {
     private String name;
     private String description;
     private Date creationDate;
+    private Currency currency;
 
     /**
      * @return the id
@@ -77,8 +78,24 @@ public class Account {
         this.creationDate = creationDate;
     }
 
+    
+    /**
+     * @return the currency
+     */
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+    
     @Override
     public String toString() {
         return name;
     }
+
 }

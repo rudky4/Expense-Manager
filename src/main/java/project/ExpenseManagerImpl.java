@@ -5,12 +5,19 @@
  */
 package project;
 
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.InputSource;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.CompiledExpression;
@@ -70,23 +77,84 @@ public class ExpenseManagerImpl implements ExpenseManager {
         }
     }
 
+//    @Override
+//    public void addPayment(Account account, Payment payment, Subject subject) {
+//        try {
+//            Long id = null;
+//            id = getId();
+//            String node = getNode(id,account.getId(),payment.getId(),subject.getId());
+//            String query = "update insert " + node + " into doc(\"results.xml\")//results";
+//            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+//            service.declareVariable("document", "/db/results.xml");
+//            service.setProperty("indent", "yes");
+//            CompiledExpression compiled = service.compile(query);
+//            service.execute(compiled);
+//
+//        } catch (NumberFormatException | XMLDBException ex) {
+//            logger.log(Level.SEVERE, "Error when creating result", ex);
+//        }
+//
+//    }
     @Override
     public void addPayment(Account account, Payment payment, Subject subject) {
+        String node = null;
         try {
-            Long id = null;
-            id = getId();
-            String node = getNode(id,account.getId(),payment.getId(),subject.getId());
-            String query = "update insert " + node + " into doc(\"results.xml\")//results";
+            String query = "for $payment in doc(\"payments.xml\")//payment where @id=" + payment.getId() + " return $payment";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
-            service.declareVariable("document", "/db/results.xml");
+            service.declareVariable("document", "/db/payments.xml");
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
-            service.execute(compiled);
 
-        } catch (NumberFormatException | XMLDBException ex) {
-            logger.log(Level.SEVERE, "Error when creating result", ex);
+            ResourceSet result = service.execute(compiled);
+            ResourceIterator it = result.getIterator();
+            while (it.hasMoreResources()) {
+                Resource resource = it.nextResource();
+                node = resource.getContent().toString();
+                updateNode(node, account.getId(), subject.getId());
+                
+            }
+
+        } catch (XMLDBException ex) {
+
         }
+    }
 
+    private void updateNode(String node, Long aid, Long sid) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = null;
+        try {
+            db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(node));
+            Document doc = db.parse(is);
+            NodeList a = doc.getElementsByTagName("payment");
+            Element parent = (Element) a.item(0);
+            Element newNote = doc.createElement("account-id");
+            Text createTextNode = doc.createTextNode(aid.toString());
+            newNote.appendChild(createTextNode);
+            parent.appendChild(newNote);
+            //String idaccount = aid.toString();
+           // newNote.setTextContent(idaccount);
+           // parent.appendChild(newNote);
+           /* a = parent.getElementsByTagName("account-id");
+            if (a.getLength() != 1) {
+                // throw new Exception
+            }
+            Element el = (Element) a.item(0);   
+
+          
+            el.setTextContent(aid.toString());
+            parent.appendChild(el);*/
+      /*      a = parent.getElementsByTagName("subject-id");
+            if (a.getLength() != 1) {
+                // throw new Exception
+            }
+            Element el = (Element) a.item(0);
+            el.setTextContent(sid.toString());
+            parent.appendChild(el);*/
+        } catch (Exception ex) {
+
+        }
     }
 
     private Long getId() {
