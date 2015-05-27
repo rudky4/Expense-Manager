@@ -161,6 +161,36 @@ public class AccountManagerImplTest {
         manager.deleteAccount(account.getId());
     }
     
+    /**
+     * Test of findAllAccounts method, of class AccountManagerImpl.
+     */
+    @Test
+    public void testFindAllAccounts() {
+        System.out.println("findAllAccounts");
+        
+        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"));
+        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"));
+        Account account3 = newAccount("Test Account 3","This is a test account 3",date("2015-05-07"));
+        
+        manager.createAccount(account1);
+        manager.createAccount(account2);
+        manager.createAccount(account3);
+        
+        List<Account> expResult = new ArrayList<>();
+        List<Account> result = new ArrayList<>();
+        expResult.add(account1);
+        expResult.add(account2);
+        expResult.add(account3);
+        result = manager.findAllAccounts();
+        assertEquals(expResult.size(), result.size());
+        assertDeepEquals(expResult, result);
+        
+        manager.deleteAccount(account1.getId());
+        manager.deleteAccount(account2.getId());
+        manager.deleteAccount(account3.getId());
+        
+    }
+    
     private static Account newAccount(String name, String description, Date creationDate) {
         Account account = new Account();
         account.setName(name);   
@@ -172,5 +202,13 @@ public class AccountManagerImplTest {
     private void assertDeepEquals(Account expected, Account actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());        
+    }
+    
+    private void assertDeepEquals(List<Account> expectedList, List<Account> actualList) {
+        for (int i = 0; i < expectedList.size(); i++) {
+            Account expected = expectedList.get(i);
+            Account actual = actualList.get(i);
+            assertDeepEquals(expected, actual);
+        }
     }
 }

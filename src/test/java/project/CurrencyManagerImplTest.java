@@ -53,7 +53,7 @@ public class CurrencyManagerImplTest {
         manager.createCurrency(currency);
         
         String ccy = currency.getCcy();
-        assertNotNull(ccy);
+        assertEquals("CZK", ccy);
         
         manager.deleteCurrency(ccy);
         
@@ -108,6 +108,38 @@ public class CurrencyManagerImplTest {
         assertEquals(expResult.size(), result.size());
         assertDeepEquals(expResult, result);
         
+        manager.deleteCurrency(currency1.getCcy());
+        manager.deleteCurrency(currency2.getCcy());
+        manager.deleteCurrency(currency3.getCcy());
+    }
+    
+    /**
+     * Test of deleteCurrency method, of class CurrencyManagerImpl.
+     */
+    @Test
+    public void testDeleteCurrency() {
+        System.out.println("deleteCurrency");
+        
+        Currency currency1 = newCurrency("CZK","Česká koruna");   
+        Currency currency2 = newCurrency("USD","American dollar"); 
+        Currency currency3 = newCurrency("EUR","Euro"); 
+        
+        manager.createCurrency(currency1);
+        manager.createCurrency(currency2);
+        manager.createCurrency(currency3);
+        
+        String ccy = currency1.getCcy();
+        manager.deleteCurrency(ccy);
+        
+        List<Currency> result = manager.findAllCurrency();
+        List<Currency> expectedResult = new ArrayList<>();
+        expectedResult.add(currency2);
+        expectedResult.add(currency3);
+        
+        assertEquals(expectedResult.size(), result.size());
+        
+        manager.deleteCurrency(currency2.getCcy());
+        manager.deleteCurrency(currency3.getCcy());
     }
     
     private static Currency newCurrency(String ccy, String ccyName) {
