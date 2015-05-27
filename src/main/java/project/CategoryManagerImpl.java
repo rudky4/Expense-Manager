@@ -5,6 +5,7 @@
  */
 package project;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.xmldb.api.DatabaseManager;
@@ -116,6 +117,28 @@ public class CategoryManagerImpl implements CategoryManager{
         return node;
     }
     
-    
+    @Override
+    public void deleteCategory(Long id) {
+        try {
+            String query = "for $category in doc(\"categories.xml\")//category[@id=\"" + id + "\"] return update delete category";
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+            service.declareVariable("document", "/db/categories.xml");
+            service.setProperty("indent", "yes");
+            CompiledExpression compiled = service.compile(query);
+            service.execute(compiled);
+        } catch (XMLDBException ex) {
+            logger.log(Level.SEVERE, "Error when delete category", ex);
+        }
+    }
+
+    @Override
+    public void updateCategory(Currency currency) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Currency> findAllCategory() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

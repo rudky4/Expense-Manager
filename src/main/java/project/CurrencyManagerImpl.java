@@ -222,4 +222,18 @@ public class CurrencyManagerImpl implements CurrencyManager {
         return currency;
     }
 
+    @Override
+    public void deleteCurrency(Long id) {
+        try {
+            String query = "for $currency in doc(\"currencies.xml\")//currency[@id=\"" + id + "\"] return update delete currency";
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+            service.declareVariable("document", "/db/currencies.xml");
+            service.setProperty("indent", "yes");
+            CompiledExpression compiled = service.compile(query);
+            service.execute(compiled);
+        } catch (XMLDBException ex) {
+            logger.log(Level.SEVERE, "Error when delete currency", ex);
+        }
+    }
+
 }
