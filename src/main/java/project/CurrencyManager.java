@@ -5,10 +5,17 @@
  */
 package project;
 
+import java.util.List;
+
 /**
  *
  * @author marek
  */
 public interface CurrencyManager {
+    
+    public void updateCurrency(Currency currency);
+    
     public void createCurrency(Currency currency);
+    
+    public List<Currency> findAllCurrency();
 }
