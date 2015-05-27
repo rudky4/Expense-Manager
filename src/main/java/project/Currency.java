@@ -42,6 +42,6 @@ public class Currency {
     }
     
     public String toString(){
-        return ccyName;
+        return ccy;
     }
 }
