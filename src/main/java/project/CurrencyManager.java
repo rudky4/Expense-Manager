@@ -13,11 +13,13 @@ import java.util.List;
  */
 public interface CurrencyManager {
     
-    public void updateCurrency(Currency currency);
+    //public void updateCurrency(Currency currency);
     
     public void createCurrency(Currency currency);
     
     public void deleteCurrency(String ccy);
     
     public List<Currency> findAllCurrency();
+    
+    public Currency getCurrencyByCcy(String ccy);
 }

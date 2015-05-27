@@ -83,20 +83,20 @@ public class CurrencyManagerImpl implements CurrencyManager {
 
     @Override
     public void createCurrency(Currency currency) {
-        if(currency==null){
+        if (currency == null) {
             throw new IllegalArgumentException("currency cannot be null");
         }
-        
-        if(currency.getCcy()==null){
+
+        if (currency.getCcy() == null) {
             throw new IllegalArgumentException("ccy cannot be null");
         }
-        
-        if(currency.getCcyName()==null){
+
+        if (currency.getCcyName() == null) {
             throw new IllegalArgumentException("currency name cannot be null");
         }
-        
+
         try {
-            if(!(isOk(currency.getCcy()))){
+            if (!(isOk(currency.getCcy()))) {
                 throw new IllegalArgumentException("ccy is now exist");
             }
             String node = getNode(currency);
@@ -113,7 +113,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
 
     private String getNode(Currency currency) {
 
-        String node = "<currency cyy=\"" + currency.getCcy() + "\">"
+        String node = "<currency ccy=\"" + currency.getCcy() + "\">"
                 + "<ccyName>" + currency.getCcyName() + "</ccyName>"
                 + "</currency>";
         return node;
@@ -136,23 +136,23 @@ public class CurrencyManagerImpl implements CurrencyManager {
         }
         return true;
     }
-    
-    @Override
+
+    /*@Override
     public void updateCurrency(Currency currency) {
-        if(currency==null){
+        if (currency == null) {
             throw new IllegalArgumentException("currency cannot be null");
         }
-        
-        if(currency.getCcy()==null){
+
+        if (currency.getCcy() == null) {
             throw new IllegalArgumentException("ccy cannot be null");
         }
-        
-        if(currency.getCcyName()==null){
+
+        if (currency.getCcyName() == null) {
             throw new IllegalArgumentException("currency name cannot be null");
         }
         try {
             String node = getNode(currency);
-            String query = "update replace doc(\"currencies.xml\")//currency[@ccy=" + currency.getCcy() + "] with " + node;
+            String query = "update replace doc(\"currencies.xml\")//currency[@ccy=\"" + currency.getCcy() + "\"] with " + node;
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/currencies.xml");
             service.setProperty("indent", "yes");
@@ -161,8 +161,8 @@ public class CurrencyManagerImpl implements CurrencyManager {
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when updating currency", ex);
         }
-    }
-    
+    }*/
+
     @Override
     public List<Currency> findAllCurrency() {
         String where = "";
@@ -225,7 +225,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
     @Override
     public void deleteCurrency(String ccy) {
         try {
-            String query = "for $currency in doc(\"currencies.xml\")//currency[@ccy=\"" + ccy + "\"] return update delete currency";
+            String query = "for $currency in doc(\"currencies.xml\")//currency[@ccy=\"" + ccy + "\"] return update delete $currency";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/currencies.xml");
             service.setProperty("indent", "yes");
@@ -234,6 +234,19 @@ public class CurrencyManagerImpl implements CurrencyManager {
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete currency", ex);
         }
+    }
+
+    @Override
+    public Currency getCurrencyByCcy(String ccy) {
+        if (ccy == null) {
+            throw new IllegalArgumentException("");
+        }
+        String where = "where @ccy=\"" + ccy + "\"";
+        List<Currency> result = findCurrencyBy(where);
+        if (result.size() != 1) {
+            return null;
+        }
+        return result.get(0);
     }
 
 }
