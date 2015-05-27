@@ -68,11 +68,11 @@ public class SubjectManagerImplTest {
         Subject subject2 = newSubject("Test Subject 2");
         manager.createSubject(subject1);
         manager.createSubject(subject2);
-        Long subjectId = subject1.getId();
+        Long subjectId = subject1.getId();        
         
-        subject1 = manager.getSubjectById(subjectId);
         subject1.setName("Bank");
         manager.updateSubject(subject1);
+        subject1 = manager.getSubjectById(subjectId);
         assertEquals("Bank", subject1.getName());
         
         assertDeepEquals(subject2, manager.getSubjectById(subject2.getId()));
@@ -160,6 +160,38 @@ public class SubjectManagerImplTest {
         manager.deleteSubject(subject4.getId());
     }
     
+    /**
+     * Test of findAllSubjects method, of class SubjectManagerImpl.
+     */
+    @Test
+    public void testFindAllSubjects() {
+        System.out.println("findAllSubjects");
+        
+        Subject subject1 = newSubject("Test 1");
+        Subject subject2 = newSubject("Test 2");
+        Subject subject3 = newSubject("Test 3");
+        Subject subject4 = newSubject("Test 4");
+        manager.createSubject(subject1);
+        manager.createSubject(subject2);
+        manager.createSubject(subject3);
+        manager.createSubject(subject4);
+        
+        List<Subject> expResult = new ArrayList<>();
+        List<Subject> result = new ArrayList<>();
+        expResult.add(subject1);
+        expResult.add(subject2);
+        expResult.add(subject3);
+        expResult.add(subject4);
+        result = manager.findAllSubjects();
+        assertEquals(expResult.size(), result.size());
+        assertDeepEquals(expResult, result);
+        
+        manager.deleteSubject(subject1.getId());
+        manager.deleteSubject(subject2.getId());
+        manager.deleteSubject(subject3.getId());
+        manager.deleteSubject(subject4.getId());
+    }
+    
     private static Subject newSubject(String name) {
         Subject subject = new Subject();
         subject.setName(name);        
@@ -169,5 +201,13 @@ public class SubjectManagerImplTest {
     private void assertDeepEquals(Subject expected, Subject actual) {
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());        
+    }
+    
+    private void assertDeepEquals(List<Subject> expectedList, List<Subject> actualList) {
+        for (int i = 0; i < expectedList.size(); i++) {
+            Subject expected = expectedList.get(i);
+            Subject actual = actualList.get(i);
+            assertDeepEquals(expected, actual);
+        }
     }
 }

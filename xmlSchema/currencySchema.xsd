@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:element name="currencies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="currency" type="currency-type" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:unique name="primaryKeySubject">
+            <xs:selector xpath="currency"/>
+            <xs:field xpath="@ccy"/>
+        </xs:unique>
+        
+    </xs:element>
+    
+    <xs:complexType name="currency-type">
+        <xs:sequence>
+            <xs:element name="ccyName" type="xs:string"/>                     
+        </xs:sequence>
+        <xs:attribute name="ccy" type="xs:string" use="required"/>
+    </xs:complexType> 
+    
+</xs:schema>
