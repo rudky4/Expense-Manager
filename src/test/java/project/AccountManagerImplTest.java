@@ -84,10 +84,10 @@ public class AccountManagerImplTest {
         manager.createAccount(account2);
         Long accountId = account1.getId();
         
-        account1 = manager.getAccountById(accountId);
         account1.setName("Bank");
         account1.setDescription("Description");
         manager.updateAccount(account1);
+        account1 = manager.getAccountById(accountId);
         assertEquals("Bank", account1.getName());
         assertEquals("Description", account1.getDescription());
         

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <xs:element name="payments">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="payment" type="payment-type" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:unique name="primaryKeyPayment">
+            <xs:selector xpath="payment"/>
+            <xs:field xpath="@id"/>
+        </xs:unique>
+        
+    </xs:element>
+    
+    <xs:complexType name="payment-type">
+        <xs:sequence>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="date" type="date-type"/>
+            <xs:element name="amount" type="amount-type"/>
+            <xs:element name="account-id" type="xs:integer"/>
+            <xs:element name="subject-id" type="xs:integer"/>
+            <xs:element name="category-id" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="date-type">
+        <xs:restriction base="xs:string">                
+                <xs:pattern value="(([0-9][0-9][0-9][0-9])\-([0-9][0-9])\-([0-9][0-9]))"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="amount-type">
+        <xs:restriction base="xs:decimal">
+                <xs:minExclusive value="0"/>
+                <xs:fractionDigits value="2"/>
+                <xs:pattern value="\d+\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
