@@ -96,7 +96,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
         }
         
         try {
-            if((isOk(currency.getCcy()))){
+            if(!(isOk(currency.getCcy()))){
                 throw new IllegalArgumentException("ccy is now exist");
             }
             String node = getNode(currency);
@@ -113,15 +113,15 @@ public class CurrencyManagerImpl implements CurrencyManager {
 
     private String getNode(Currency currency) {
 
-        String node = "<payment cyy=\"" + currency.getCcy() + "\">"
-                + "<ccyName>" + currency.getCcyName() + "</ccyname>"
-                + "</payment>";
+        String node = "<currency cyy=\"" + currency.getCcy() + "\">"
+                + "<ccyName>" + currency.getCcyName() + "</ccyName>"
+                + "</currency>";
         return node;
     }
 
     private boolean isOk(String ccy) {
         try {
-            String query = "for $currency in doc(\"currencies.xml\")//currency where @id=" + ccy + " return $currency";
+            String query = "for $currency in doc(\"currencies.xml\")//currency where @ccy=\"" + ccy + "\"" + " return $currency";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/currencies.xml");
             service.setProperty("indent", "yes");
