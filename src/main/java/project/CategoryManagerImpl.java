@@ -5,9 +5,23 @@
  */
 package project;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.CompiledExpression;
@@ -25,7 +39,7 @@ import org.xmldb.api.modules.XQueryService;
  *
  * @author marek
  */
-public class CategoryManagerImpl implements CategoryManager{
+public class CategoryManagerImpl implements CategoryManager {
 
     private static final Logger logger = Logger.getLogger(SubjectManagerImpl.class.getName());
 
@@ -43,7 +57,7 @@ public class CategoryManagerImpl implements CategoryManager{
     public CategoryManagerImpl() {
         createDatabase();
     }
-    
+
     private void createDatabase() {
         try {
             Class c = Class.forName(DRIVER);
@@ -66,9 +80,20 @@ public class CategoryManagerImpl implements CategoryManager{
         }
     }
 
-    
     @Override
     public void createCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("category cannot be null");
+        }
+
+        if (category.getId() != null) {
+            throw new IllegalArgumentException("id must be null");
+        }
+
+        if (category.getName() == null) {
+            throw new IllegalArgumentException("name cannot be null");
+        }
+
         try {
             Long id = null;
             id = getId();
@@ -81,10 +106,10 @@ public class CategoryManagerImpl implements CategoryManager{
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
         } catch (NumberFormatException | XMLDBException ex) {
-            logger.log(Level.SEVERE, "Error when creating payment", ex);
+            logger.log(Level.SEVERE, "Error when creating category", ex);
         }
     }
-    
+
     private Long getId() {
         Long id = (long) 1;
         String idQuery = "max(for $category in doc(\"categories.xml\")//category return $category/@id)";
@@ -108,7 +133,7 @@ public class CategoryManagerImpl implements CategoryManager{
         }
         return id;
     }
-    
+
     private String getNode(Category category) {
 
         String node = "<category id=\"" + category.getId() + "\">"
@@ -116,11 +141,14 @@ public class CategoryManagerImpl implements CategoryManager{
                 + "</category>";
         return node;
     }
-    
+
     @Override
     public void deleteCategory(Long id) {
+        if(id==null){
+            throw new IllegalArgumentException("id cannot be null");
+        }
         try {
-            String query = "for $category in doc(\"categories.xml\")//category[@id=\"" + id + "\"] return update delete category";
+            String query = "for $category in doc(\"categories.xml\")//category[@id=\"" + id + "\"] return update delete $category";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/categories.xml");
             service.setProperty("indent", "yes");
@@ -132,13 +160,102 @@ public class CategoryManagerImpl implements CategoryManager{
     }
 
     @Override
-    public void updateCategory(Currency currency) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("category cannot be null");
+        }
+
+        if (category.getId() == null) {
+            throw new IllegalArgumentException("id must be null");
+        }
+
+        if (category.getName() == null) {
+            throw new IllegalArgumentException("name cannot be null");
+        }
+
+        try {
+            String node = getNode(category);
+            String query = "update replace doc(\"categories.xml\")//category[@id=" + category.getId() + "] with " + node;
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+            service.declareVariable("document", "/db/categories.xml");
+            service.setProperty("indent", "yes");
+            CompiledExpression compiled = service.compile(query);
+            service.execute(compiled);
+        } catch (XMLDBException ex) {
+            logger.log(Level.SEVERE, "Error when updating category", ex);
+        }
     }
 
     @Override
-    public List<Currency> findAllCategory() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Category> findAllCategory() {
+        String where = "";
+        return findCategoryBy(where);
     }
-    
+
+    private List<Category> findCategoryBy(String where) {
+        List<Category> resultList = new ArrayList<>();
+        try {
+            String queryStart = "for $category in doc(\"categories.xml\")//category ";
+            String queryEnd = " return $category";
+            String query = queryStart + where + queryEnd;
+            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
+            service.declareVariable("document", "/db/categories.xml");
+            service.setProperty("indent", "yes");
+            CompiledExpression compiled = service.compile(query);
+
+            ResourceSet result = service.execute(compiled);
+            ResourceIterator it = result.getIterator();
+            while (it.hasMoreResources()) {
+                Resource resource = it.nextResource();
+                resultList.add(parseCategoryFromXML(resource.getContent().toString()));
+            }
+        } catch (XMLDBException ex) {
+
+        }
+        return resultList;
+    }
+
+    private Category parseCategoryFromXML(String xml) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = null;
+        Category category = new Category();
+        try {
+            db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xml));
+            try {
+
+                Document doc = db.parse(is);
+                NodeList a = doc.getElementsByTagName("category");
+                Element parent = (Element) a.item(0);
+                category.setId(Long.parseLong(parent.getAttribute("id")));
+
+                a = parent.getElementsByTagName("name");
+                if (a.getLength() != 1) {
+                    // throw new Exception
+                }
+                Element el = (Element) a.item(0);
+                category.setName(el.getTextContent());
+            } catch (SAXException | IOException ex) {
+                Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return category;
+    }
+
+    @Override
+    public Category getCategoryById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("");
+        }
+        String where = "where @id=" + Long.toString(id);
+        List<Category> result = findCategoryBy(where);
+        if (result.size() != 1) {
+            throw new IllegalArgumentException();
+        }
+        return result.get(0);
+    }
+
 }

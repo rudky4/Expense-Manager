@@ -5,6 +5,8 @@
  */
 package project;
 
+import java.util.Objects;
+
 /**
  *
  * @author marek
@@ -35,13 +37,28 @@ public class Category {
     }
 
     /**
-     * @param Name the Name to set
+     * @param name the Name to set
      */
-    public void setName(String Name) {
+    public void setName(String name) {
         this.name = name;
     }
     
     public String toString(){
         return name;
+    }
+    
+     @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 }

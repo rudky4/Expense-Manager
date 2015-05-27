@@ -15,9 +15,11 @@ public interface CategoryManager {
 
     public void createCategory(Category category);
 
-    public void updateCategory(Currency currency);
+    public void updateCategory(Category category);
 
     public void deleteCategory(Long id);
 
-    public List<Currency> findAllCategory();
+    public List<Category> findAllCategory();
+    
+    public Category getCategoryById(Long id);
 }
