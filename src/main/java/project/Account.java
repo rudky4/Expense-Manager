@@ -20,7 +20,7 @@ public class Account {
     private String name;
     private String description;
     private Date creationDate;
-    private Currency currency;
+    private String currencyCcy;
 
     /**
      * @return the id
@@ -82,15 +82,15 @@ public class Account {
     /**
      * @return the currency
      */
-    public Currency getCurrency() {
-        return currency;
+    public String getCurrency() {
+        return currencyCcy;
     }
 
     /**
      * @param currency the currency to set
      */
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCurrency(String currencyCcy) {
+        this.currencyCcy = currencyCcy;
     }
     
     @Override

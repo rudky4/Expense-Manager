@@ -144,6 +144,7 @@ public class AccountManagerImpl implements AccountManager {
                 + "<name>" + account.getName() + "</name>"
                 + "<description>" + account.getDescription() + "</description>"
                 + "<creationDate>" + dateF.format(account.getCreationDate()) + "</creationDate>"
+                + "<currency>" + account.getCurrency() + "</currency>"
                 + "</account>";
         return node;
     }
@@ -281,6 +282,13 @@ public class AccountManagerImpl implements AccountManager {
                 el = (Element) a.item(0);
                 DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
                 account.setCreationDate(dateF.parse(el.getTextContent()));
+                
+                a = parent.getElementsByTagName("currency");
+                if (a.getLength() != 1) {
+                    // throw new Exception
+                }
+                el = (Element) a.item(0);
+                account.setCurrency(el.getTextContent());
             } catch (SAXException | IOException | ParseException ex) {
                 Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
