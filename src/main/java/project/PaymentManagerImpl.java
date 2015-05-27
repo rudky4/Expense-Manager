@@ -168,6 +168,9 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public void deletePayment(Long id) {
+        if(id == null){
+            throw new IllegalArgumentException("ID cannot be null!");
+        }
         try {
             String query = "for $payment in doc(\"payments.xml\")//payment[@id=\"" + id + "\"] return update delete $payment";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
@@ -188,7 +191,7 @@ public class PaymentManagerImpl implements PaymentManager {
         String where = "where @id=" + Long.toString(id);
         List<Payment> result = findPaymentsBy(where);
         if (result.size() != 1) {
-            throw new IllegalArgumentException();
+            return null;
         }
         return result.get(0);
     }
