@@ -84,14 +84,14 @@ public class Payment {
     /**
      * @return the acountId
      */
-    public Long getAccountId() {
+    public Long getAcountId() {
         return accountId;
     }
 
     /**
      * @param acountId the acountId to set
      */
-    public void setAccountId(Long acountId) {
+    public void setAcountId(Long acountId) {
         this.accountId = acountId;
     }
 
@@ -161,7 +161,7 @@ public class Payment {
                 + "<description>" + this.getDescription() + "</description>"
                 + "<date>" + dateF.format(this.getDate()) + "</date>"
                 + "<amount>" + this.getAmount() + "</amount>"
-                + "<account-id>" + this.getAccountId().toString() + "</account-id>"
+                + "<account-id>" + this.getAcountId().toString() + "</account-id>"
                 + "<subject-id>" + this.getSubjectId().toString() + "</subject-id>"
                 + "<category-id>" + this.getCategoryId().toString() + "</category-id>"
                 + "</payment>";

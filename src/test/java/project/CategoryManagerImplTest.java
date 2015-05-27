@@ -115,7 +115,7 @@ public class CategoryManagerImplTest {
         manager.updateCategory(c1);        
         assertEquals("Party", c1.getName());
   
-        manager.deleteCategory(categoryId);
+        manager.deletePayment(paymentId);
     }
 
     

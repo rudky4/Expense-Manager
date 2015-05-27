@@ -7,8 +7,6 @@ package project;
 
 import java.io.StringReader;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -227,27 +225,4 @@ public class ExpenseManagerImpl implements ExpenseManager {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String createXML(List<Payment> list){
-        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
-        String result = "<payments>";
-        AccountManagerImpl accManager = new AccountManagerImpl();
-        SubjectManagerImpl subManager = new SubjectManagerImpl();
-        CategoryManagerImpl catManager = new CategoryManagerImpl();
-        
-        
-        for(int i=0;i<list.size();i++){
-            result += "<payment id=\"" + list.get(i).getId() + "\">"
-                + "<description>" + list.get(i).getDescription() + "</description>"
-                + "<date>" + dateF.format(list.get(i).getDate()) + "</date>"
-                + "<amount>" + list.get(i).getAmount() + "</amount>"
-                + "<account-id>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-id>"
-                + "<subject-id>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-id>"
-                + "<category-id>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-id>"
-                + "</payment>";
-        }
-  
-        result += "</payments>";
-        return result;
-    }
-    
 }
