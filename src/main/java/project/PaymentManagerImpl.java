@@ -83,6 +83,11 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public void createPayment(Payment payment) {
+        
+        if(payment == null){
+            throw new IllegalArgumentException("payment cannot be null");
+        }
+        
         if (payment.getId() != null) {
             throw new IllegalArgumentException("id must be null");
         }
@@ -141,6 +146,11 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public void updatePayment(Payment payment) {
+        
+        if(payment == null){
+            throw new IllegalArgumentException("payment cannot be null");
+        }
+        
         if (payment.getId() == null) {
             throw new IllegalArgumentException("id cannot be null");
         }
