@@ -60,7 +60,6 @@ public class PaymentManagerImplTest {
         manager.createPayment(payment);
         
         Long paymentId = payment.getId();
-        System.out.println(paymentId);
         assertNotNull(paymentId);
         assertNotNull(payment.getAcountId());
         assertNotNull(payment.getCategoryId());
@@ -78,11 +77,13 @@ public class PaymentManagerImplTest {
     @Test
     public void testUpdatePayment() {
         Payment p1 = newPayment("Flowers",date("2015-05-05"),new BigDecimal("5.60"),account,subject,category);
+        System.out.println(account.getId());
         manager.createPayment(p1);
         
         Long paymentId = p1.getId();
 
         p1 = manager.getPaymentById(paymentId);
+        System.out.println(p1.getAcountId());
         p1.setAmount(new BigDecimal("6.50"));
         manager.updatePayment(p1);        
         assertEquals(new BigDecimal("6.50"), p1.getAmount());
