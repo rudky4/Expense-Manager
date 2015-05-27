@@ -139,7 +139,7 @@ public class Payment {
                 + "<amount>" + this.getAmount() + "</amount>"
                 + "<account-id>" + this.getAcountId().toString() + "</account-id>"
                 + "<subject-id>" + this.getSubjectId().toString() + "</subject-id>"
-                + "<category-id>" + this.getCategoryId().toString() + "/<category-id>"
+                + "<category-id>" + this.getCategoryId().toString() + "</category-id>"
                 + "</payment>";
         return result;
     }

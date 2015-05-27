@@ -107,8 +107,8 @@ public class PaymentManagerImpl implements PaymentManager {
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
            // XPathQueryService service = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-           // service.setProperty("indent", "yes");
-           // service.query(query);
+            // service.setProperty("indent", "yes");
+            // service.query(query);
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating payment", ex);
         }
@@ -258,6 +258,28 @@ public class PaymentManagerImpl implements PaymentManager {
                 }
                 el = (Element) a.item(0);
                 payment.setAmount(new BigDecimal(el.getTextContent()));
+
+                a = parent.getElementsByTagName("account-id");
+                if (a.getLength() != 1) {
+                    // throw new Exception
+                }
+                el = (Element) a.item(0);
+                payment.setAcountId(Long.parseLong(el.getTextContent()));
+
+                a = parent.getElementsByTagName("subject-id");
+                if (a.getLength() != 1) {
+                    // throw new Exception
+                }
+                el = (Element) a.item(0);
+                payment.setSubjectId(Long.parseLong(el.getTextContent()));
+
+                a = parent.getElementsByTagName("category-id");
+                if (a.getLength() != 1) {
+                    // throw new Exception
+                }
+                el = (Element) a.item(0);
+                payment.setCategoryId(Long.parseLong(el.getTextContent()));
+
             } catch (SAXException | IOException | ParseException ex) {
                 Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
