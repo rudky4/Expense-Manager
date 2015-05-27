@@ -277,7 +277,7 @@ public class PaymentManagerImpl implements PaymentManager {
                     // throw new Exception
                 }
                 el = (Element) a.item(0);
-                payment.setAcountId(Long.parseLong(el.getTextContent()));
+                payment.setAccountId(Long.parseLong(el.getTextContent()));
 
                 a = parent.getElementsByTagName("subject-id");
                 if (a.getLength() != 1) {

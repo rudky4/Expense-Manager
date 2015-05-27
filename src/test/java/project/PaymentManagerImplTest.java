@@ -61,7 +61,7 @@ public class PaymentManagerImplTest {
         
         Long paymentId = payment.getId();
         assertNotNull(paymentId);
-        assertNotNull(payment.getAcountId());
+        assertNotNull(payment.getAccountId());
         assertNotNull(payment.getCategoryId());
         assertNotNull(payment.getCategoryId());
         Payment temp = manager.getPaymentById(paymentId);
@@ -270,7 +270,7 @@ public class PaymentManagerImplTest {
         payment.setDescription(description);
         payment.setDate(date);
         payment.setAmount(amount);
-        payment.setAcountId(account.getId());
+        payment.setAccountId(account.getId());
         payment.setCategoryId(category.getId());
         payment.setSubjectId(subject.getId());
         return payment;
@@ -301,7 +301,7 @@ public class PaymentManagerImplTest {
         assertEquals(p1.getDescription(), p2.getDescription());
         assertEquals(p1.getDate(),p2.getDate());
         assertEquals(p1.getAmount(),p2.getAmount());
-        assertEquals(p1.getAcountId(),p2.getAcountId());
+        assertEquals(p1.getAccountId(),p2.getAccountId());
         assertEquals(p1.getSubjectId(),p2.getSubjectId());
         assertEquals(p1.getCategoryId(),p2.getCategoryId());
     }
