@@ -30,4 +30,6 @@ public interface ExpenseManager {
     public List<Account> getAllPaymentsBySubject(Long accountId, Long subjectId);
 
     public List<Account> getAllPaymentsBySubject(Long accountId, Long subjectId, Date startDate, Date endDate);
+    
+    public String createXML(List<Payment> list);
 }
