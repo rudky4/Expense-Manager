@@ -67,6 +67,8 @@ public class AccountManagerImplTest {
         Long accountID = account.getId();
         assertNotNull(accountID);
         
+        manager.deleteAccount(account.getId());
+        
     }
 
     /**
@@ -90,6 +92,9 @@ public class AccountManagerImplTest {
         assertEquals("Description", account1.getDescription());
         
         assertDeepEquals(account2, manager.getAccountById(account2.getId()));
+        
+        manager.deleteAccount(account1.getId());
+        manager.deleteAccount(account2.getId());
     }
 
     /**
@@ -115,14 +120,17 @@ public class AccountManagerImplTest {
         expectedResult.add(account3);
         
         assertEquals(expectedResult.size(), result.size());
+        
+        manager.deleteAccount(account2.getId());
+        manager.deleteAccount(account3.getId());
     }
 
     /**
      * Test of getAccount method, of class AccountManagerImpl.
      */
     @Test
-    public void testGetAccount() {
-        System.out.println("getAccount");
+    public void testGetAccountById() {
+        System.out.println("getAccountById");
        
         Long id = new Long(1);
         Account account = newAccount("Test Account","This is a test account",date("2015-05-05"));
@@ -133,6 +141,24 @@ public class AccountManagerImplTest {
         Account accountById = manager.getAccountById(id);
         assertEquals(accountById.getId(), result.getId());
         assertEquals(accountById.getName(), result.getName());
+        
+        manager.deleteAccount(account.getId());
+    }
+    
+    @Test
+    public void testGetAccountByName() {
+        System.out.println("getAccountByName");       
+        
+        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"));
+        manager.createAccount(account);
+        List<Account> list = new ArrayList<>();
+        list.add(account);
+        Account result = list.get(0);
+        Account accountByName = manager.getAccountByName("Test Account");
+        assertEquals(accountByName.getId(), result.getId());
+        assertEquals(accountByName.getName(), result.getName());
+        
+        manager.deleteAccount(account.getId());
     }
     
     private static Account newAccount(String name, String description, Date creationDate) {

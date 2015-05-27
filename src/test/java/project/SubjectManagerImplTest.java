@@ -53,6 +53,8 @@ public class SubjectManagerImplTest {
         Long subjectID = subject.getId();
         assertNotNull(subjectID);
         
+        manager.deleteSubject(subjectID);
+        
     }
 
     /**
@@ -74,6 +76,9 @@ public class SubjectManagerImplTest {
         assertEquals("Bank", subject1.getName());
         
         assertDeepEquals(subject2, manager.getSubjectById(subject2.getId()));
+        
+        manager.deleteSubject(subjectId);
+        manager.deleteSubject(subject2.getId());
     }
 
     /**
@@ -100,7 +105,8 @@ public class SubjectManagerImplTest {
         
         assertEquals(expectedResult.size(), result.size());
         
-        
+        manager.deleteSubject(subject2.getId());
+        manager.deleteSubject(subject3.getId());
     }
 
     /**
@@ -120,6 +126,7 @@ public class SubjectManagerImplTest {
         assertEquals(subjectById.getId(), result.getId());
         assertEquals(subjectById.getName(), result.getName());        
         
+        manager.deleteSubject(subject.getId());
     }
 
     /**
@@ -146,6 +153,11 @@ public class SubjectManagerImplTest {
         result2 = manager.getSubjectByName(name2);              
         assertEquals(subject1, result1);
         assertEquals(subject2, result2);
+        
+        manager.deleteSubject(subject1.getId());
+        manager.deleteSubject(subject2.getId());
+        manager.deleteSubject(subject3.getId());
+        manager.deleteSubject(subject4.getId());
     }
     
     private static Subject newSubject(String name) {
