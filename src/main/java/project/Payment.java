@@ -6,6 +6,8 @@ package project;
  * and open the template in the editor.
  */
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -123,6 +125,23 @@ public class Payment {
     @Override
     public String toString() {
         return id + ": " + date + " " + amount;
+    }
+    
+    /**
+     * 
+     * @return converted payment to XML schema
+     */
+    public String toXML(){
+        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
+        String result = "<payment id=\"" + this.getId() + "\">"
+                + "<description>" + this.getDescription() + "</description>"
+                + "<date>" + dateF.format(this.getDate()) + "</date>"
+                + "<amount>" + this.getAmount() + "</amount>"
+                + "<account-id>" + this.getAcountId().toString() + "</account-id>"
+                + "<subject-id>" + this.getSubjectId().toString() + "</subject-id>"
+                + "<category-id>" + this.getCategoryId().toString() + "/<category-id>"
+                + "</payment>";
+        return result;
     }
 
 }

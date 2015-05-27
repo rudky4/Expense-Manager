@@ -99,7 +99,7 @@ public class PaymentManagerImpl implements PaymentManager {
             Long id = null;
             id = getId();
             payment.setId(id);
-            String node = getNode(payment);
+            String node = payment.toXML();
             String query = "update insert " + node + " into doc(\"payments.xml\")//payments";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/payments.xml");
@@ -139,20 +139,6 @@ public class PaymentManagerImpl implements PaymentManager {
         return id;
     }
 
-    private String getNode(Payment payment) {
-        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
-
-        String node = "<payment id=\"" + payment.getId() + "\">"
-                + "<description>" + payment.getDescription() + "</description>"
-                + "<date>" + dateF.format(payment.getDate()) + "</date>"
-                + "<amount>" + payment.getAmount() + "</amount>"
-                + "<account-id>" + payment.getAcountId().toString() + "</account-id>"
-                + "<subject-id>" + payment.getSubjectId().toString() + "</subject-id>"
-                + "<category-id>" + payment.getCategoryId().toString() + "/<category-id>"
-                + "</payment>";
-        return node;
-    }
-
     @Override
     public void updatePayment(Payment payment) {
         if (payment.getId() == null) {
@@ -168,7 +154,7 @@ public class PaymentManagerImpl implements PaymentManager {
             throw new IllegalArgumentException("amount cannot be null");
         }
         try {
-            String node = getNode(payment);
+            String node = payment.toXML();
             String query = "update replace doc(\"payments.xml\")//payment[@id=" + payment.getId() + "] with " + node;
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/payments.xml");
