@@ -17,7 +17,7 @@ public interface CurrencyManager {
     
     public void createCurrency(Currency currency);
     
-    public void deleteCurrency(Long id);
+    public void deleteCurrency(String ccy);
     
     public List<Currency> findAllCurrency();
 }

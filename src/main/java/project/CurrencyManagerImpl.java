@@ -223,9 +223,9 @@ public class CurrencyManagerImpl implements CurrencyManager {
     }
 
     @Override
-    public void deleteCurrency(Long id) {
+    public void deleteCurrency(String ccy) {
         try {
-            String query = "for $currency in doc(\"currencies.xml\")//currency[@id=\"" + id + "\"] return update delete currency";
+            String query = "for $currency in doc(\"currencies.xml\")//currency[@ccy=\"" + ccy + "\"] return update delete currency";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
             service.declareVariable("document", "/db/currencies.xml");
             service.setProperty("indent", "yes");
