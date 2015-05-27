@@ -66,24 +66,69 @@ public class PaymentManagerImplTest {
         assertNotNull(payment.getCategoryId());
         Payment temp = manager.getPaymentById(paymentId);
         assertEquals(payment,temp);
+        assertDeepEquals(payment,temp);
         assertNotSame(payment,temp);
         
         manager.deletePayment(paymentId);
     }
 
+    @Test
+    public void testCreatePaymentWithWrongArguments(){
+        try {
+            manager.createPayment(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        Payment payment = newPayment("Running shoes Nike",date("2015-05-05"),new BigDecimal("130.00"),account,subject,category);
+        payment.setId(1l);
+        try {
+            manager.createPayment(payment);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        payment = newPayment("Running shoes Nike",date("2015-05-05"),null,account,subject,category);
+        payment.setId(1l);
+        try {
+            manager.createPayment(payment);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        payment = newPayment(null,date("2015-05-05"),new BigDecimal("130.00"),account,subject,category);
+        payment.setId(1l);
+        try {
+            manager.createPayment(payment);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        payment = newPayment("Running shoes Nike",null,new BigDecimal("130.00"),account,subject,category);
+        payment.setId(1l);
+        try {
+            manager.createPayment(payment);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+    }
+    
     /**
      * Test of updatePayment method, of class PaymentManagerImpl.
      */
     @Test
     public void testUpdatePayment() {
         Payment p1 = newPayment("Flowers",date("2015-05-05"),new BigDecimal("5.60"),account,subject,category);
-        System.out.println(account.getId());
         manager.createPayment(p1);
         
         Long paymentId = p1.getId();
 
         p1 = manager.getPaymentById(paymentId);
-        System.out.println(p1.getAcountId());
         p1.setAmount(new BigDecimal("6.50"));
         manager.updatePayment(p1);        
         assertEquals(new BigDecimal("6.50"), p1.getAmount());
@@ -107,6 +152,59 @@ public class PaymentManagerImplTest {
         manager.deletePayment(paymentId);
     }
 
+    
+    @Test
+    public void testUpdatePaymentWithWrongArguments(){
+        Payment p1 = newPayment("Running shoes Nike",date("2015-05-05"),new BigDecimal("130.00"),account,subject,category);
+        manager.createPayment(p1);
+        
+        Long paymentId = p1.getId();
+        
+        try {
+            manager.updatePayment(null);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        try {
+            p1 = manager.getPaymentById(paymentId);
+            p1.setId(null);
+            manager.updatePayment(p1);        
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        try {
+            p1 = manager.getPaymentById(paymentId);
+            p1.setAmount(null);
+            manager.updatePayment(p1);        
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        try {
+            p1 = manager.getPaymentById(paymentId);
+            p1.setDescription(null);
+            manager.updatePayment(p1);        
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+        try {
+            p1 = manager.getPaymentById(paymentId);
+            p1.setDate(null);
+            manager.updatePayment(p1);        
+            fail();
+        } catch (IllegalArgumentException ex) {
+            //OK
+        }
+        
+    }
+    
     /**
      * Test of deletePayment method, of class PaymentManagerImpl.
      */
@@ -147,6 +245,7 @@ public class PaymentManagerImplTest {
         
         Payment result = manager.getPaymentById(paymentId);
         assertEquals(payment,result);
+        assertDeepEquals(payment,result);
     }
 
     /**
@@ -191,9 +290,27 @@ public class PaymentManagerImplTest {
         return subject;
     }
     
-     private static Category newCategory(String name) {
+    private static Category newCategory(String name) {
         Category category = new Category();
         category.setName(name);        
         return category;
+    }
+     
+    private void assertDeepEquals(Payment p1, Payment p2) {
+        assertEquals(p1.getId(), p2.getId());
+        assertEquals(p1.getDescription(), p2.getDescription());
+        assertEquals(p1.getDate(),p2.getDate());
+        assertEquals(p1.getAmount(),p2.getAmount());
+        assertEquals(p1.getAcountId(),p2.getAcountId());
+        assertEquals(p1.getSubjectId(),p2.getSubjectId());
+        assertEquals(p1.getCategoryId(),p2.getCategoryId());
+    }
+    
+    private void assertEqualsList(List<Payment> list1,List<Payment> list2){
+        if(list1.size() != list2.size()) fail();
+        
+        for(int i=0;i<list1.size();i++){
+            assertDeepEquals(list1.get(i),list2.get(i));
+        }
     }
 }
