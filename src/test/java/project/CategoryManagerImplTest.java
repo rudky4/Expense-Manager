@@ -170,7 +170,7 @@ public class CategoryManagerImplTest {
         
         Category c4 = newCategory("Category 4");
         manager.createCategory(c4);
-        
+        list.add(c4);
         assertEqualsList(list,manager.findAllCategory());
         
         
