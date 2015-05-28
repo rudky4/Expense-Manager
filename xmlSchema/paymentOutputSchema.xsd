@@ -28,9 +28,9 @@ and open the template in the editor.
             <xs:element name="description" type="xs:string"/>
             <xs:element name="date" type="date-type"/>
             <xs:element name="amount" type="amount-type"/>
-            <xs:element name="account-id" type="xs:long"/>
-            <xs:element name="subject-id" type="xs:long"/>
-            <xs:element name="category-id" type="xs:long"/>
+            <xs:element name="account-name" type="xs:string"/>
+            <xs:element name="subject-name" type="xs:string"/>
+            <xs:element name="category-name" type="xs:string"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" use="required"/>
     </xs:complexType>
