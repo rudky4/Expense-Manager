@@ -218,8 +218,8 @@ public class ExpenseManagerImpl implements ExpenseManager {
     public BigDecimal getAccountBalance(Long accountId, Date startDate, Date endDate) {
         List<Payment> paymnentsList = paymentManager.findAllPayments();
         BigDecimal balance = new BigDecimal(0);
-        for (Payment p : paymnentsList) {
-            if (p.getAccountId().equals(accountId) && ((startDate.compareTo(p.getDate())) >= 0) && (endDate.compareTo(p.getDate()) <= 0)) {
+        for (Payment p : paymnentsList) {            
+            if (p.getAccountId().equals(accountId) && ((startDate.compareTo(p.getDate())) <= 0) && (endDate.compareTo(p.getDate()) >= 0)) {
                 balance = balance.add(p.getAmount());
             }
         }
@@ -243,7 +243,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
         List<Payment> paymentList = paymentManager.findAllPayments();
         List<Payment> result = new ArrayList<>();
         for (Payment p : paymentList) {
-            if (p.getAccountId().equals(accountId) && ((startDate.compareTo(p.getDate())) >= 0) && (endDate.compareTo(p.getDate()) <= 0)) {
+            if (p.getAccountId().equals(accountId) && ((startDate.compareTo(p.getDate())) <= 0) && (endDate.compareTo(p.getDate()) >= 0)) {
                 result.add(p);
             }
         }
