@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface ExpenseManager {
 
-    public void addPayment(Account account, Payment payment, Subject subject);
+  //  public void addPayment(Account account, Payment payment, Subject subject);
 
-    public void removePayment(Long accountId, Long paymentId);
+  //  public void removePayment(Long accountId, Long paymentId);
 
     public BigDecimal getAccountBalance(Long accountId);
 

@@ -7,6 +7,7 @@ package project;
 
 import java.io.StringReader;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +40,7 @@ import org.xmldb.api.modules.XQueryService;
  */
 public class ExpenseManagerImpl implements ExpenseManager {
 
-    private static final Logger logger = Logger.getLogger(SubjectManagerImpl.class.getName());
+   /* private static final Logger logger = Logger.getLogger(SubjectManagerImpl.class.getName());
 
     private static final String DRIVER = "org.exist.xmldb.DatabaseImpl";
     private static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/";
@@ -154,10 +155,10 @@ public class ExpenseManagerImpl implements ExpenseManager {
             Element el = (Element) a.item(0);
             el.setTextContent(sid.toString());
             parent.appendChild(el);*/
-        } catch (Exception ex) {
+    /*    } catch (Exception ex) {
 
         }
-    }
+    
 
     private Long getId() {
         Long id = (long) 1;
@@ -190,21 +191,39 @@ public class ExpenseManagerImpl implements ExpenseManager {
                 + "<subject-id>" + sid + "</subject-id>"
                 + "</result>";
         return node;
-    }
+    }*/
 
-    @Override
+  /*  @Override
     public void removePayment(Long accountId, Long paymentId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
+    private PaymentManager paymentManager = new PaymentManagerImpl();
+    private SubjectManager subjectManager = new SubjectManagerImpl();
+    private AccountManager accountManager = new AccountManagerImpl();
+    
     @Override
     public BigDecimal getAccountBalance(Long accountId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Payment> paymnentsList = paymentManager.findAllPayments();
+        BigDecimal balance = new BigDecimal(0);
+        for(Payment p : paymnentsList){
+            if(p.getAccountId().equals(accountId)){
+                balance.add(p.getAmount());
+            }
+        }
+        return balance;
     }
 
     @Override
     public BigDecimal getAccountBalance(Long accountId, Date startDate, Date endDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Payment> paymnentsList = paymentManager.findAllPayments();
+        BigDecimal balance = new BigDecimal(0);
+        for(Payment p : paymnentsList){
+            if(p.getAccountId().equals(accountId) && ((startDate.compareTo(p.getDate()))>=0) && (endDate.compareTo(p.getDate())<=0)){
+                balance.add(p.getAmount());
+            }
+        }
+        return balance;
     }
 
     @Override
