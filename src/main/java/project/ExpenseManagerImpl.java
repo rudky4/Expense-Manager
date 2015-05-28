@@ -233,16 +233,15 @@ public class ExpenseManagerImpl implements ExpenseManager {
         AccountManagerImpl accManager = new AccountManagerImpl();
         SubjectManagerImpl subManager = new SubjectManagerImpl();
         CategoryManagerImpl catManager = new CategoryManagerImpl();
-        
-        
+          
         for(int i=0;i<list.size();i++){
             result += "<payment id=\"" + list.get(i).getId() + "\">"
                 + "<description>" + list.get(i).getDescription() + "</description>"
                 + "<date>" + dateF.format(list.get(i).getDate()) + "</date>"
                 + "<amount>" + list.get(i).getAmount() + "</amount>"
-                + "<account-id>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-id>"
-                + "<subject-id>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-id>"
-                + "<category-id>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-id>"
+                + "<account-name>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-name>"
+                + "<subject-name>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-name>"
+                + "<category-name>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-name>"
                 + "</payment>";
         }
   
