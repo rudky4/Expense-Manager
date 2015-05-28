@@ -10,10 +10,12 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import project.Account;
 import project.AccountManagerImpl;
 import project.Category;
@@ -40,7 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static ExpenseManagerImpl expenseManager = new ExpenseManagerImpl();
     private static CurrencyManagerImpl currencyManager = new CurrencyManagerImpl();
     private static SubjectManagerImpl subjectManager = new SubjectManagerImpl();  
-    
+    private List<Payment> toTable = new ArrayList<>();
     
     
     
@@ -66,8 +68,9 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        accountList = new javax.swing.JComboBox();
+        subjectList = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,6 +78,14 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         paymentTableModel = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jButton5 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -102,21 +113,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExpenseUlimate Manager");
-        setMaximumSize(new java.awt.Dimension(780, 465));
-        setMinimumSize(new java.awt.Dimension(780, 465));
-        setPreferredSize(new java.awt.Dimension(780, 465));
+        setMaximumSize(new java.awt.Dimension(780, 530));
+        setMinimumSize(new java.awt.Dimension(780, 530));
+        setPreferredSize(new java.awt.Dimension(780, 530));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Vector vec = new Vector<Account>(accountManager.findAllAccounts());
+        Account tempAcc = new Account();
+        tempAcc.setId(0L);
+        tempAcc.setName("-- " + localization.getString("allAccounts") + " --");
+        vec.add(0, tempAcc);
+        accountList.setModel(new javax.swing.DefaultComboBoxModel(vec));
+        accountList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                accountListItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(accountList, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 11, 300, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Vector vec2 = new Vector<Subject>(subjectManager.findAllSubjects());
+        Subject tempSub = new Subject();
+        tempSub.setId(0L);
+        tempSub.setName("-- " + localization.getString("allSubjects") + " --");
+        vec2.add(0, tempSub);
+        subjectList.setModel(new javax.swing.DefaultComboBoxModel(vec2));
+        getContentPane().add(subjectList, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 49, 300, 30));
 
         jLabel1.setText("Account:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel2.setText("Subject:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 49, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(2);
         jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 404, 728, 50));
 
         paymentTableModel.setModel(new JPaymentTableModel(localization));
         paymentTableModel.setMaximumSize(null);
@@ -130,7 +163,50 @@ public class MainFrame extends javax.swing.JFrame {
         //  List<Payment> list = manager.findAllPayments();
         //  ((JPaymentTableModel)paymentTableModel.getModel()).refresh(list);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 109, 728, 250));
+
         jLabel3.setText("Payments:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        jButton1.setText("Add Payment");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 150, -1));
+
+        jButton2.setText("Delete Payment");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 150, -1));
+
+        jButton3.setText("EditPayment");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 150, -1));
+
+        jButton4.setText("Generate HTML report");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 370, 200, -1));
+        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 13, 142, 30));
+        getContentPane().add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 49, 142, 30));
+
+        jButton5.setText("Show");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 11, 128, 70));
+
+        jCheckBox1.setText("Use Date");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jMenu2.setText("File");
 
@@ -160,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem6.setText("Delete");
         jMenu6.add(jMenuItem6);
 
-        jMenuItem7.setText("Update");
+        jMenuItem7.setText("Edit");
         jMenu6.add(jMenuItem7);
 
         jMenuBar1.add(jMenu6);
@@ -173,7 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem9.setText("Delete");
         jMenu7.add(jMenuItem9);
 
-        jMenuItem10.setText("Update");
+        jMenuItem10.setText("Edit");
         jMenu7.add(jMenuItem10);
 
         jMenuBar1.add(jMenu7);
@@ -186,7 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem12.setText("Delete");
         jMenu8.add(jMenuItem12);
 
-        jMenuItem13.setText("Update");
+        jMenuItem13.setText("Edit");
         jMenu8.add(jMenuItem13);
 
         jMenuBar1.add(jMenu8);
@@ -210,48 +286,28 @@ public class MainFrame extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void accountListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_accountListItemStateChanged
+            // TODO add your handling code here:
+    }//GEN-LAST:event_accountListItemStateChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,8 +346,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox accountList;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -323,5 +387,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     public javax.swing.JTable paymentTableModel;
+    private javax.swing.JComboBox subjectList;
     // End of variables declaration//GEN-END:variables
 }
