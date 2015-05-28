@@ -5,12 +5,25 @@
  */
 package GUI;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import project.Account;
 import project.AccountManagerImpl;
+import project.Category;
+import project.CategoryManagerImpl;
+import project.Currency;
 import project.CurrencyManagerImpl;
 import project.ExpenseManagerImpl;
+import project.Payment;
 import project.PaymentManagerImpl;
+import project.Subject;
 import project.SubjectManagerImpl;
 
 /**
@@ -28,6 +41,12 @@ public class MainFrame extends javax.swing.JFrame {
     private static CurrencyManagerImpl currencyManager = new CurrencyManagerImpl();
     private static SubjectManagerImpl subjectManager = new SubjectManagerImpl();  
     
+    
+    
+    
+
+    
+    
     //private JPaymentTableModel paymentTableModel;
     
     /**
@@ -35,6 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        
     }
 
     /**
@@ -82,9 +102,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExpenseUlimate Manager");
-        setMaximumSize(new java.awt.Dimension(780, 460));
-        setMinimumSize(new java.awt.Dimension(780, 460));
-        setPreferredSize(new java.awt.Dimension(780, 460));
+        setMaximumSize(new java.awt.Dimension(780, 465));
+        setMinimumSize(new java.awt.Dimension(780, 465));
+        setPreferredSize(new java.awt.Dimension(780, 465));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -100,7 +120,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         paymentTableModel.setModel(new JPaymentTableModel(localization));
         paymentTableModel.setMaximumSize(null);
+        paymentTableModel.getColumnModel().getColumn(0).setPreferredWidth(300);
+        paymentTableModel.getColumnModel().getColumn(1).setPreferredWidth(100);
+        paymentTableModel.getColumnModel().getColumn(2).setPreferredWidth(150);
+        paymentTableModel.getColumnModel().getColumn(3).setPreferredWidth(150);
+        paymentTableModel.getColumnModel().getColumn(4).setPreferredWidth(100);
         jScrollPane2.setViewportView(paymentTableModel);
+        //PaymentManagerImpl manager = new PaymentManagerImpl();
+        //  List<Payment> list = manager.findAllPayments();
+        //  ((JPaymentTableModel)paymentTableModel.getModel()).refresh(list);
 
         jLabel3.setText("Payments:");
 
@@ -256,6 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                
             }
         });
     }
@@ -293,6 +322,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTable paymentTableModel;
+    public javax.swing.JTable paymentTableModel;
     // End of variables declaration//GEN-END:variables
 }

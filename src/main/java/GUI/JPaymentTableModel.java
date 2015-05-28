@@ -9,6 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import project.AccountManagerImpl;
 import project.CurrencyManagerImpl;
 import project.Payment;
+import project.PaymentManagerImpl;
 import project.SubjectManagerImpl;
 
 /*
@@ -30,15 +31,23 @@ public class JPaymentTableModel extends AbstractTableModel {
     private static final int COLUMN_SUBNAME = 3;
     private static final int COLUMN_AMOUNT = 4;
     private static final int COLUMN_CURRENCY = 5;
-    
+    private AccountManagerImpl account;
+    private SubjectManagerImpl subject;
+    private CurrencyManagerImpl currency;
     private List<Payment> table = new ArrayList<>();
     
     private ResourceBundle localization; 
     
     
     
-    public JPaymentTableModel(ResourceBundle localization){ 
+    public JPaymentTableModel(ResourceBundle localization){
+        account = new AccountManagerImpl();
+        subject = new SubjectManagerImpl(); 
+        currency = new CurrencyManagerImpl();
         this.localization = localization;
+        PaymentManagerImpl manager = new PaymentManagerImpl();
+        List<Payment> list = manager.findAllPayments();  
+        this.refresh(list);
     }
     
     public JPaymentTableModel(List<Payment> data, ResourceBundle localization){
@@ -60,21 +69,17 @@ public class JPaymentTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(rowIndex >= table.size()){
             throw new IllegalArgumentException("Row index out of bounds.");            
-        }
-        
-        AccountManagerImpl account = new AccountManagerImpl(); 
-        SubjectManagerImpl subject = new SubjectManagerImpl(); 
-        CurrencyManagerImpl currency = new CurrencyManagerImpl();
+        }                
         
         Payment payment = table.get(rowIndex);
         
         switch (columnIndex) {
             case COLUMN_DESCRIPTION: return payment.getDescription();
             case COLUMN_DATE: return payment.getDate().toString().substring(0, 10);
-            case COLUMN_ACCNAME: return account.getAccountById(payment.getAcountId()).getName();
+            case COLUMN_ACCNAME: return account.getAccountById(payment.getAccountId()).getName();
             case COLUMN_SUBNAME: return subject.getSubjectById(payment.getCategoryId()).getName();
             case COLUMN_AMOUNT: return payment.getAmount();
-            case COLUMN_CURRENCY: return account.getAccountById(payment.getAcountId()).getCurrency();
+            case COLUMN_CURRENCY: return account.getAccountById(payment.getAccountId()).getCurrency();
             default:
                 throw new IllegalArgumentException("columnIndex");
         }
