@@ -1,0 +1,10 @@
+<payments>
+	<payment id="1">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectví Dobrovský</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+</payments>

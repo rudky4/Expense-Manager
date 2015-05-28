@@ -1,0 +1,15 @@
+h1{
+	padding: 5px;
+	margin: 5px;
+	color: #000066;
+}
+
+tr{
+        padding: 5px;
+        background-color: gainsboro;
+}
+
+th{
+    background-color:  #73CF73;
+    text-align: center;
+}
