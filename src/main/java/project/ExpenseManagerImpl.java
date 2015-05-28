@@ -227,7 +227,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     }
 
     @Override
-    public List<Payment> getAllPayments(Long accountId) {
+    public List<Payment> getAllPaymentsByAccount(Long accountId) {
         List<Payment> paymentList = paymentManager.findAllPayments();
         List<Payment> result = new ArrayList<>();
         for (Payment p : paymentList) {
@@ -239,7 +239,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     }
 
     @Override
-    public List<Payment> getAllPayments(Long accountId, Date startDate, Date endDate) {
+    public List<Payment> getAllPaymentsByAcoount(Long accountId, Date startDate, Date endDate) {
         List<Payment> paymentList = paymentManager.findAllPayments();
         List<Payment> result = new ArrayList<>();
         for (Payment p : paymentList) {
@@ -251,11 +251,11 @@ public class ExpenseManagerImpl implements ExpenseManager {
     }
 
     @Override
-    public List<Payment> getAllPaymentsBySubject(Long accountId, Long subjectId) {
+    public List<Payment> getAllPaymentsBySubjectAndAccount(Long accountId, Long subjectId) {
         List<Payment> paymentList = paymentManager.findAllPayments();
         List<Payment> result = new ArrayList<>();
         for (Payment p : paymentList) {
-            if (p.getAccountId().equals(accountId)) {
+            if (p.getAccountId().equals(accountId) && p.getSubjectId().equals(subjectId)) {
                 result.add(p);
             }
         }
@@ -263,7 +263,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     }
 
     @Override
-    public List<Payment> getAllPaymentsBySubject(Long accountId, Long subjectId, Date startDate, Date endDate) {
+    public List<Payment> getAllPaymentsBySubjectAndAccount(Long accountId, Long subjectId, Date startDate, Date endDate) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -287,6 +287,16 @@ public class ExpenseManagerImpl implements ExpenseManager {
 
         result += "</payments>";
         return result;
+    }
+
+    @Override
+    public List<Payment> getAllPaymentsBySubject(Long accountId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Payment> getAllPaymentsBySubject(Long accountId, Date startDate, Date endDate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

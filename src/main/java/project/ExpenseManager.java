@@ -23,13 +23,17 @@ public interface ExpenseManager {
 
     public BigDecimal getAccountBalance(Long accountId, Date startDate, Date endDate);
 
-    public List<Payment> getAllPayments(Long accountId);
+    public List<Payment> getAllPaymentsByAccount(Long accountId);
 
-    public List<Payment> getAllPayments(Long accountId, Date startDate, Date endDate);
+    public List<Payment> getAllPaymentsByAcoount(Long accountId, Date startDate, Date endDate);
 
-    public List<Payment> getAllPaymentsBySubject(Long accountId, Long subjectId);
+    public List<Payment> getAllPaymentsBySubjectAndAccount(Long accountId, Long subjectId);
 
-    public List<Payment> getAllPaymentsBySubject(Long accountId, Long subjectId, Date startDate, Date endDate);
+    public List<Payment> getAllPaymentsBySubjectAndAccount(Long accountId, Long subjectId, Date startDate, Date endDate);
+    
+    public List<Payment> getAllPaymentsBySubject(Long accountId);
+    
+    public List<Payment> getAllPaymentsBySubject(Long accountId, Date startDate, Date endDate);
     
     public String createXML(List<Payment> list);
 }
