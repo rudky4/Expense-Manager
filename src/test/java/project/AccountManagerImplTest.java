@@ -61,7 +61,7 @@ public class AccountManagerImplTest {
     public void testCreateAccount() {
         System.out.println("createAccount");
         
-        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"));        
+        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"),"CZK");        
         manager.createAccount(account);
         
         Long accountID = account.getId();
@@ -78,18 +78,20 @@ public class AccountManagerImplTest {
     public void testUpdateAccount() {
         System.out.println("updateAccount");
         
-        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"));  
-        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"));  
+        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"),"CZK");  
+        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"),"EUR");  
         manager.createAccount(account1);
         manager.createAccount(account2);
         Long accountId = account1.getId();
         
         account1.setName("Bank");
         account1.setDescription("Description");
+        account1.setCurrency("USD");
         manager.updateAccount(account1);
         account1 = manager.getAccountById(accountId);
         assertEquals("Bank", account1.getName());
         assertEquals("Description", account1.getDescription());
+        assertEquals("USD", account1.getCurrency());
         
         assertDeepEquals(account2, manager.getAccountById(account2.getId()));
         
@@ -104,9 +106,9 @@ public class AccountManagerImplTest {
     public void testDeleteAccount() {
         System.out.println("deleteAccount");
         
-        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"));
-        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"));
-        Account account3 = newAccount("Test Account 3","This is a test account 3",date("2015-05-07"));
+        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"),"CZK");
+        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"),"USD");
+        Account account3 = newAccount("Test Account 3","This is a test account 3",date("2015-05-07"),"EUR");
         manager.createAccount(account1);
         manager.createAccount(account2);
         manager.createAccount(account3);
@@ -133,7 +135,7 @@ public class AccountManagerImplTest {
         System.out.println("getAccountById");
        
         Long id = new Long(1);
-        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"));
+        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"),"CZK");
         manager.createAccount(account);
         List<Account> list = new ArrayList<>();
         list.add(account);
@@ -149,7 +151,7 @@ public class AccountManagerImplTest {
     public void testGetAccountByName() {
         System.out.println("getAccountByName");       
         
-        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"));
+        Account account = newAccount("Test Account","This is a test account",date("2015-05-05"),"CZK");
         manager.createAccount(account);
         List<Account> list = new ArrayList<>();
         list.add(account);
@@ -168,9 +170,9 @@ public class AccountManagerImplTest {
     public void testFindAllAccounts() {
         System.out.println("findAllAccounts");
         
-        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"));
-        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"));
-        Account account3 = newAccount("Test Account 3","This is a test account 3",date("2015-05-07"));
+        Account account1 = newAccount("Test Account 1","This is a test account 1",date("2015-05-05"),"CZK");
+        Account account2 = newAccount("Test Account 2","This is a test account 2",date("2015-05-06"),"USD");
+        Account account3 = newAccount("Test Account 3","This is a test account 3",date("2015-05-07"),"EUR");
         
         manager.createAccount(account1);
         manager.createAccount(account2);
@@ -191,11 +193,12 @@ public class AccountManagerImplTest {
         
     }
     
-    private static Account newAccount(String name, String description, Date creationDate) {
+    private static Account newAccount(String name, String description, Date creationDate, String ccy) {
         Account account = new Account();
         account.setName(name);   
         account.setDescription(description);
         account.setCreationDate(creationDate);
+        account.setCurrency(ccy);
         return account;
     }
     
