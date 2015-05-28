@@ -140,16 +140,16 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(subjectList, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 49, 300, 30));
 
         jLabel1.setText("Account:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel2.setText("Subject:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 49, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(2);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 404, 728, 50));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 404, 750, 50));
 
         paymentTableModel.setModel(new JPaymentTableModel(localization));
         paymentTableModel.setMaximumSize(null);
@@ -163,7 +163,7 @@ public class MainFrame extends javax.swing.JFrame {
         //  List<Payment> list = manager.findAllPayments();
         //  ((JPaymentTableModel)paymentTableModel.getModel()).refresh(list);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 109, 728, 250));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 750, 250));
 
         jLabel3.setText("Payments:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
@@ -193,20 +193,26 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 370, 200, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 13, 142, 30));
-        getContentPane().add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 49, 142, 30));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 200, -1));
+        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 142, 30));
+        getContentPane().add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 142, 30));
 
         jButton5.setText("Show");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 11, 128, 70));
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 128, 70));
 
         jCheckBox1.setText("Use Date");
+        jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
         jMenu2.setText("File");
 
@@ -308,6 +314,22 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if((((Account)accountList.getSelectedItem()).getId() == 0) && (((Subject)subjectList.getSelectedItem()).getId() == 0) )
+            toTable = paymentManager.findAllPayments();
+        
+        if((((Account)accountList.getSelectedItem()).getId() == 0) && (((Subject)subjectList.getSelectedItem()).getId() != 0) )
+            toTable = expenseManager.getAllPaymentsBySubject(((Subject)subjectList.getSelectedItem()).getId());
+        
+        if((((Account)accountList.getSelectedItem()).getId() != 0) && (((Subject)subjectList.getSelectedItem()).getId() == 0) )
+            toTable = expenseManager.getAllPaymentsByAccount(((Account)accountList.getSelectedItem()).getId());
+        
+        if((((Account)accountList.getSelectedItem()).getId() != 0) && (((Subject)subjectList.getSelectedItem()).getId() != 0) )
+            toTable = expenseManager.getAllPaymentsBySubjectAndAccount(((Account)accountList.getSelectedItem()).getId(), ((Subject)subjectList.getSelectedItem()).getId());
+        
+        ((JPaymentTableModel)paymentTableModel.getModel()).refresh(toTable);
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
