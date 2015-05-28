@@ -59,7 +59,7 @@ private AccountManager accountManager = new AccountManagerImpl();
     }
 
     @Override
-    public List<Payment> getAllPaymentsByAcoount(Long accountId, Date startDate, Date endDate) {
+    public List<Payment> getAllPaymentsByAccount(Long accountId, Date startDate, Date endDate) {
         List<Payment> paymentList = paymentManager.findAllPayments();
         List<Payment> result = new ArrayList<>();
         for (Payment p : paymentList) {

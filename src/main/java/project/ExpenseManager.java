@@ -25,7 +25,7 @@ public interface ExpenseManager {
 
     public List<Payment> getAllPaymentsByAccount(Long accountId);
 
-    public List<Payment> getAllPaymentsByAcoount(Long accountId, Date startDate, Date endDate);
+    public List<Payment> getAllPaymentsByAccount(Long accountId, Date startDate, Date endDate);
 
     public List<Payment> getAllPaymentsBySubjectAndAccount(Long accountId, Long subjectId);
 
