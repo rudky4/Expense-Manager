@@ -75,9 +75,9 @@ public class JPaymentTableModel extends AbstractTableModel {
         
         switch (columnIndex) {
             case COLUMN_DESCRIPTION: return payment.getDescription();
-            case COLUMN_DATE: return payment.getDate().toString().substring(0, 10);
+            case COLUMN_DATE: return payment.getDate().toString().substring(8,10)+". "+payment.getDate().toString().substring(4,7)+" "+payment.getDate().toString().substring(24,28);
             case COLUMN_ACCNAME: return account.getAccountById(payment.getAccountId()).getName();
-            case COLUMN_SUBNAME: return subject.getSubjectById(payment.getCategoryId()).getName();
+            case COLUMN_SUBNAME: return subject.getSubjectById(payment.getSubjectId()).getName();
             case COLUMN_AMOUNT: return payment.getAmount();
             case COLUMN_CURRENCY: return account.getAccountById(payment.getAccountId()).getCurrency();
             default:

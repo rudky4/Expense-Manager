@@ -1,6 +1,7 @@
 package project;
 
 
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -23,4 +24,6 @@ public interface PaymentManager {
     public Payment getPaymentById(Long id);
     
     public List<Payment> findAllPayments();
+    
+    public List<Payment>findAllPayments(Date startDate, Date endDate);
 }

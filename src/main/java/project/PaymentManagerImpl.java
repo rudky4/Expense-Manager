@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -206,6 +207,19 @@ public class PaymentManagerImpl implements PaymentManager {
         return result.get(0);
     }
 
+    @Override
+    public List<Payment>findAllPayments(Date startDate, Date endDate) {
+        List<Payment> paymentList = this.findAllPayments();
+        List<Payment> result = new ArrayList<>();
+        for (Payment p : paymentList) {
+            if (((startDate.compareTo(p.getDate())) <= 0) && (endDate.compareTo(p.getDate()) >= 0)) {
+                result.add(p);
+            }
+        }
+        return result;
+    }
+    
+    
     @Override
     public List<Payment> findAllPayments() {
         String where = "";
