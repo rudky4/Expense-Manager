@@ -83,6 +83,23 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jDialog1 = new javax.swing.JDialog();
+        jLabel10 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jFrame2 = new javax.swing.JFrame();
+        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox5 = new javax.swing.JComboBox();
+        jComboBox6 = new javax.swing.JComboBox();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        jButton8 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
         accountList = new javax.swing.JComboBox();
         subjectList = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -178,6 +195,78 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jFrame1.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
 
+        jDialog1.setMaximumSize(new java.awt.Dimension(300, 150));
+        jDialog1.setMinimumSize(new java.awt.Dimension(300, 150));
+        jDialog1.setPreferredSize(new java.awt.Dimension(300, 150));
+        jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setText(localization.getString("non_valid_payment"));
+        jDialog1.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 380, 30));
+
+        jButton7.setText(localization.getString("close"));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jDialog1.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, -1));
+
+        jFrame2.setTitle(localization.getString("addPayment"));
+        jFrame2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jFrame2.setMinimumSize(new java.awt.Dimension(550, 300));
+        jFrame2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Account>(accountManager.findAllAccounts())));
+        jFrame2.getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 320, 30));
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Subject>(subjectManager.findAllSubjects())));
+        jFrame2.getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 320, 30));
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Category>(categoryManager.findAllCategory())));
+        jFrame2.getContentPane().add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 320, 30));
+        jFrame2.getContentPane().add(jDateChooser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 170, 30));
+
+        jButton8.setText(localization.getString("updatePayment"));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jFrame2.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 200, 30));
+
+        jLabel11.setText(localization.getString("account"));
+        jFrame2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+
+        jLabel12.setText(localization.getString("subject"));
+        jFrame2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+
+        jLabel13.setText(localization.getString("category"));
+        jFrame2.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+
+        jLabel14.setText(localization.getString("date"));
+        jFrame2.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
+        jLabel15.setText(localization.getString("amount"));
+        jFrame2.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+
+        jTextField3.setText("0.00");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jFrame2.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 90, 30));
+
+        jLabel16.setText(localization.getString("description"));
+        jFrame2.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        jFrame2.getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExpenseUlimate Manager");
         setMaximumSize(new java.awt.Dimension(780, 530));
@@ -252,6 +341,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 150, -1));
 
         jButton3.setText("EditPayment");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 150, -1));
 
         jButton4.setText("Generate HTML report");
@@ -379,7 +473,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           jFrame1.setVisible(true);
+        jDateChooser1.setDate(new Date());
+        jFrame1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
@@ -418,17 +513,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String desc = jTextField2.getText();
         BigDecimal amount = null;
+        Date date = jDateChooser4.getDate();
+        
         try{
            amount = new BigDecimal(jTextField1.getText().replaceAll(",","."));
         }
         catch(NumberFormatException ex){
-            //jDialog4.setVisible(true);   TODO: ErrorFrame
+            jDialog1.setVisible(true);
         }
         
-        if (desc.equals("") || (amount == null)){
-            //jDialog4.setVisible(true);  
-        } else {
-            
+        if (desc.equals("") || (amount == null) || (date == null)){
+            jDialog1.setVisible(true);  
+        } else {            
         Payment payment = new Payment();
         payment.setAccountId(((Account)jComboBox1.getSelectedItem()).getId());
         payment.setSubjectId(((Subject)jComboBox2.getSelectedItem()).getId());
@@ -438,15 +534,63 @@ public class MainFrame extends javax.swing.JFrame {
         payment.setDate(jDateChooser1.getDate());
         paymentManager.createPayment(payment);
        // new MainApplication.PaymentSwingWorker(MainApplication.PaymentActions.ADD_PAYMENT, payment).execute();
-        }
         update();
         jFrame1.dispose();
-        
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        jDialog1.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String desc = jTextField4.getText();
+        BigDecimal amount = null;
+        Date date = jDateChooser4.getDate();
+        try{
+           amount = new BigDecimal(jTextField3.getText().replaceAll(",","."));
+        }
+        catch(NumberFormatException ex){
+            jDialog1.setVisible(true);
+        }
+        
+        if (desc.equals("") || (amount == null) || (date == null)){
+            jDialog1.setVisible(true);  
+        } else {
+            
+        Payment payment = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
+        payment.setAccountId(((Account)jComboBox4.getSelectedItem()).getId());
+        payment.setSubjectId(((Subject)jComboBox5.getSelectedItem()).getId());
+        payment.setCategoryId(((Category)jComboBox6.getSelectedItem()).getId());
+        payment.setDescription(desc);
+        payment.setAmount(amount);
+        payment.setDate(jDateChooser4.getDate());
+        paymentManager.updatePayment(payment);        
+       // new MainApplication.PaymentSwingWorker(MainApplication.PaymentActions.UPDATE_PAYMENT, payment).execute();
+        update();
+        jFrame2.dispose();
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
+        jTextField4.setText(temp.getDescription());
+        jTextField3.setText(temp.getAmount().toString());
+        jDateChooser4.setDate(temp.getDate());
+        jFrame2.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -492,15 +636,30 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
+    private javax.swing.JComboBox jComboBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser4;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -538,6 +697,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     public javax.swing.JTable paymentTableModel;
     private javax.swing.JComboBox subjectList;
     // End of variables declaration//GEN-END:variables

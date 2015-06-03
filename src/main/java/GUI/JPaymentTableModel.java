@@ -3,6 +3,7 @@ package GUI;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.table.AbstractTableModel;
@@ -31,21 +32,17 @@ public class JPaymentTableModel extends AbstractTableModel {
     private static final int COLUMN_SUBNAME = 3;
     private static final int COLUMN_AMOUNT = 4;
     private static final int COLUMN_CURRENCY = 5;
-    private AccountManagerImpl account;
-    private SubjectManagerImpl subject;
-    private CurrencyManagerImpl currency;
-    private List<Payment> table = new ArrayList<>();
-    
+    private AccountManagerImpl account = new AccountManagerImpl();
+    private SubjectManagerImpl subject = new SubjectManagerImpl(); 
+    private CurrencyManagerImpl currency = new CurrencyManagerImpl();
+    private PaymentManagerImpl manager = new PaymentManagerImpl();
+    private List<Payment> table = new ArrayList<>();    
     private ResourceBundle localization; 
     
     
     
     public JPaymentTableModel(ResourceBundle localization){
-        account = new AccountManagerImpl();
-        subject = new SubjectManagerImpl(); 
-        currency = new CurrencyManagerImpl();
-        this.localization = localization;
-        PaymentManagerImpl manager = new PaymentManagerImpl();
+        this.localization = localization;        
         List<Payment> list = manager.findAllPayments();  
         this.refresh(list);
     }
@@ -72,10 +69,11 @@ public class JPaymentTableModel extends AbstractTableModel {
         }                
         
         Payment payment = table.get(rowIndex);
+        Date date = payment.getDate();
         
         switch (columnIndex) {
             case COLUMN_DESCRIPTION: return payment.getDescription();
-            case COLUMN_DATE: return payment.getDate().toString().substring(8,10)+". "+payment.getDate().toString().substring(4,7)+" "+payment.getDate().toString().substring(24,28);
+            case COLUMN_DATE: return date.toString().substring(8,10)+". "+date.toString().substring(4,7)+" "+date.toString().substring(24,date.toString().length());
             case COLUMN_ACCNAME: return account.getAccountById(payment.getAccountId()).getName();
             case COLUMN_SUBNAME: return subject.getSubjectById(payment.getSubjectId()).getName();
             case COLUMN_AMOUNT: return payment.getAmount();
