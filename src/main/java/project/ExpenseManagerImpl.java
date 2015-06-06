@@ -118,7 +118,7 @@ private AccountManager accountManager = new AccountManagerImpl();
         return result;
     }
 
-    public String createXML(List<Payment> list) {
+    /*public String createXML(List<Payment> list) {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
         String result = "<payments>";
         AccountManagerImpl accManager = new AccountManagerImpl();
@@ -137,6 +137,60 @@ private AccountManager accountManager = new AccountManagerImpl();
         }
 
         result += "</payments>";
+        return result;
+    }*/
+    
+    public String createXML(List<Payment> list) {
+        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
+        String result = "<payments>";
+        AccountManagerImpl accManager = new AccountManagerImpl();
+        SubjectManagerImpl subManager = new SubjectManagerImpl();
+        CategoryManagerImpl catManager = new CategoryManagerImpl();
+        BigDecimal sum = new BigDecimal (0);
+        BigDecimal incomingSum = new BigDecimal (0);
+        BigDecimal outgoingSum = new BigDecimal (0);
+        BigDecimal highestIncoming = new BigDecimal (0);
+        BigDecimal highestOutgoing = new BigDecimal (0);
+        int count = 0;
+        int incomingCount = 0;
+        int outgoingCount = 0;
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getAmount().compareTo(new BigDecimal(0)) == 1){
+                incomingCount++;
+                incomingSum = incomingSum.add(list.get(i).getAmount());
+            }
+            if(list.get(i).getAmount().compareTo(new BigDecimal(0)) == -1){
+                outgoingCount++;
+                outgoingSum = outgoingSum.add(list.get(i).getAmount());
+            }
+            if(list.get(i).getAmount().compareTo(highestIncoming) == 1){
+                highestIncoming = list.get(i).getAmount();
+            }
+            if(list.get(i).getAmount().compareTo(highestOutgoing) == -1){
+                highestOutgoing = list.get(i).getAmount();
+            }
+            sum = sum.add(list.get(i).getAmount());
+            count++;
+            result += "<payment id=\"" + list.get(i).getId() + "\">"
+                    + "<description>" + list.get(i).getDescription() + "</description>"
+                    + "<date>" + dateF.format(list.get(i).getDate()) + "</date>"
+                    + "<amount>" + list.get(i).getAmount() + "</amount>"
+                    + "<account-name>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-name>"
+                    + "<subject-name>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-name>"
+                    + "<category-name>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-name>"
+                    + "</payment>";
+        }        
+        result += "<count>" + count + "</count>";
+        result += "<sum>" + sum + "</sum>";
+        result += "<incomingCount>" + incomingCount + "</incomingCount>";
+        result += "<outgoingCount>" + outgoingCount + "</outgoingCount>";
+        result += "<incomingSum>" + incomingSum + "</incomingSum>";
+        result += "<outgoingSum>" + outgoingSum + "</outgoingSum>";
+        result += "<highestIncoming>" + highestIncoming + "</highestIncoming>";
+        result += "<highestOutgoing>" + highestOutgoing + "</highestOutgoing>";
+        result += "</payments>";
+        
         return result;
     }
 }

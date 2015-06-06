@@ -13,6 +13,14 @@ and open the template in the editor.
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="payment" type="payment-type" maxOccurs="unbounded"/>
+                <xs:element name="count" type="xs:integer" maxOccurs="1"/>
+                <xs:element name="sum" type="xs:decimal" maxOccurs="1"/>
+                <xs:element name="incomingCount" type="xs:integer" maxOccurs="1"/>
+                <xs:element name="outgoingCount" type="xs:integer" maxOccurs="1"/>
+                <xs:element name="incomingSum" type="xs:decimal" maxOccurs="1"/>
+                <xs:element name="outgoingSum" type="xs:decimal" maxOccurs="1"/>
+                <xs:element name="highestIncoming" type="xs:decimal" maxOccurs="1"/>
+                <xs:element name="highestOutgoing" type="xs:decimal" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
         

@@ -1,10 +1,195 @@
-<payments>
+<?xml version="1.0" encoding="UTF-8"?>
+<payments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="paymentOutputSchema.xsd">
 	<payment id="1">
 		<description>Kniha - Jak zabít ptáčka</description>
 		<date>2015-10-12</date>
 		<amount>9.90</amount>
 		<account-name>Volný čas</account-name>
-		<subject-name>Knihkupectví Dobrovský</subject-name>
+		<subject-name>Knihkupectví Dobrovsky</subject-name>
 		<category-name>Knihy</category-name>
 	</payment>
+        <payment id="2">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="3">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="4">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="5">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="6">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="7">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="8">
+		<description>Jak zabít</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="9">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="10">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="11">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="12">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="13">
+		<description>Boty Adidas</description>
+		<date>2015-03-09</date>
+		<amount>69.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>A3 Sport</subject-name>
+		<category-name>Volný čas</category-name>
+	</payment>
+        <payment id="14">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="15">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="16">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="17">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="18">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="19">
+		<description>Kniha - Jak zabít ptáčka</description>
+		<date>2015-10-12</date>
+		<amount>9.90</amount>
+		<account-name>Volný čas</account-name>
+		<subject-name>Knihkupectvi Dobrovsky</subject-name>
+		<category-name>Knihy</category-name>
+	</payment>
+        <payment id="20">
+		<description>Boty Puma</description>
+		<date>2015-05-12</date>
+		<amount>49.90</amount>
+		<account-name>Sport</account-name>
+		<subject-name>A3 Sport</subject-name>
+		<category-name>Sport</category-name>
+	</payment>
+        <payment id="21">
+		<description>Boty Puma</description>
+		<date>2015-05-12</date>
+		<amount>49.90</amount>
+		<account-name>Sport</account-name>
+		<subject-name>A3 Sport</subject-name>
+		<category-name>Sport</category-name>
+	</payment>
+        <payment id="22">
+		<description>Boty Puma</description>
+		<date>2015-05-12</date>
+		<amount>49.90</amount>
+		<account-name>Sport</account-name>
+		<subject-name>A3 Sport</subject-name>
+		<category-name>Sport</category-name>
+	</payment>
+        <payment id="23">
+		<description>Boty Puma</description>
+		<date>2015-05-12</date>
+		<amount>49.90</amount>
+		<account-name>Sport</account-name>
+		<subject-name>A3 Sport</subject-name>
+		<category-name>Sport</category-name>
+	</payment>
+        <count>18</count>
+        <sum>100.00</sum>
+        <incomingCount>9</incomingCount>
+        <outgoingCount>9</outgoingCount>
+        <incomingSum>24605000.00</incomingSum>
+        <outgoingSum>-25000.99</outgoingSum>
+        <highestIncoming>24600000.00</highestIncoming>
+        <highestOutgoing>-1000.00</highestOutgoing>
 </payments>

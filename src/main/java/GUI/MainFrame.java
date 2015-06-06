@@ -195,9 +195,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jFrame1.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
 
-        jDialog1.setMaximumSize(new java.awt.Dimension(300, 150));
         jDialog1.setMinimumSize(new java.awt.Dimension(300, 150));
-        jDialog1.setPreferredSize(new java.awt.Dimension(300, 150));
         jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setText(localization.getString("non_valid_payment"));
@@ -364,6 +362,11 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 128, 70));
 
         jCheckBox1.setText("Use Date");
@@ -465,7 +468,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
+        paymentManager.deletePayment(temp.getId());
+        update();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -522,7 +527,7 @@ public class MainFrame extends javax.swing.JFrame {
             jDialog1.setVisible(true);
         }
         
-        if (desc.equals("") || (amount == null) || (date == null)){
+        if (desc.equals("") || (amount == null)){
             jDialog1.setVisible(true);  
         } else {            
         Payment payment = new Payment();
@@ -584,6 +589,9 @@ public class MainFrame extends javax.swing.JFrame {
         Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
         jTextField4.setText(temp.getDescription());
         jTextField3.setText(temp.getAmount().toString());
+        jComboBox4.setSelectedItem(accountManager.getAccountById(temp.getAccountId()));
+        jComboBox5.setSelectedItem(subjectManager.getSubjectById(temp.getSubjectId()));
+        jComboBox6.setSelectedItem(categoryManager.getCategoryById(temp.getCategoryId()));
         jDateChooser4.setDate(temp.getDate());
         jFrame2.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -591,6 +599,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
