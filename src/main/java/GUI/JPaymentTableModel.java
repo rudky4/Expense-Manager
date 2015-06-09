@@ -106,6 +106,10 @@ public class JPaymentTableModel extends AbstractTableModel {
         return table.get(rowIndex);
     }
     
+    public List<Payment> getPayments(){
+        return this.table;
+    }
+    
     public void refresh(Collection<Payment> data){
         table.clear();
         table.addAll(data);

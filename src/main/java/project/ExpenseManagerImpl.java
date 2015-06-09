@@ -5,12 +5,20 @@
  */
 package project;
 
+import java.io.File;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 /**
  *
@@ -142,7 +150,7 @@ private AccountManager accountManager = new AccountManagerImpl();
     
     public String createXML(List<Payment> list) {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
-        String result = "<payments>";
+        String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<payments>\n";
         AccountManagerImpl accManager = new AccountManagerImpl();
         SubjectManagerImpl subManager = new SubjectManagerImpl();
         CategoryManagerImpl catManager = new CategoryManagerImpl();
@@ -172,25 +180,38 @@ private AccountManager accountManager = new AccountManagerImpl();
             }
             sum = sum.add(list.get(i).getAmount());
             count++;
-            result += "<payment id=\"" + list.get(i).getId() + "\">"
-                    + "<description>" + list.get(i).getDescription() + "</description>"
-                    + "<date>" + dateF.format(list.get(i).getDate()) + "</date>"
-                    + "<amount>" + list.get(i).getAmount() + "</amount>"
-                    + "<account-name>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-name>"
-                    + "<subject-name>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-name>"
-                    + "<category-name>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-name>"
-                    + "</payment>";
+            result += "\t<payment id=\"" + list.get(i).getId() + "\">\n"
+                    + "\t\t<description>" + list.get(i).getDescription() + "</description>\n"
+                    + "\t\t<date>" + dateF.format(list.get(i).getDate()) + "</date>\n"
+                    + "\t\t<amount>" + list.get(i).getAmount() + "</amount>\n"
+                    + "\t\t<account-name>" + accManager.getAccountById(list.get(i).getAccountId()).getName() + "</account-name>\n"
+                    + "\t\t<subject-name>" + subManager.getSubjectById(list.get(i).getSubjectId()).getName() + "</subject-name>\n"
+                    + "\t\t<category-name>" + catManager.getCategoryById(list.get(i).getCategoryId()).getName() + "</category-name>\n"
+                    + "\t\t</payment>";
         }        
-        result += "<count>" + count + "</count>";
-        result += "<sum>" + sum + "</sum>";
-        result += "<incomingCount>" + incomingCount + "</incomingCount>";
-        result += "<outgoingCount>" + outgoingCount + "</outgoingCount>";
-        result += "<incomingSum>" + incomingSum + "</incomingSum>";
-        result += "<outgoingSum>" + outgoingSum + "</outgoingSum>";
-        result += "<highestIncoming>" + highestIncoming + "</highestIncoming>";
-        result += "<highestOutgoing>" + highestOutgoing + "</highestOutgoing>";
+        result += "<count>" + count + "</count>\n";
+        result += "<sum>" + sum + "</sum>\n";
+        result += "<incomingCount>" + incomingCount + "</incomingCount>\n";
+        result += "<outgoingCount>" + outgoingCount + "</outgoingCount>\n";
+        result += "<incomingSum>" + incomingSum + "</incomingSum>\n";
+        result += "<outgoingSum>" + outgoingSum + "</outgoingSum>\n";
+        result += "<highestIncoming>" + highestIncoming + "</highestIncoming>\n";
+        result += "<highestOutgoing>" + highestOutgoing + "</highestOutgoing>\n";
         result += "</payments>";
         
         return result;
+    }
+    
+    public static void createHTML(String document, String output) 
+            throws TransformerConfigurationException, TransformerException {
+        
+        TransformerFactory tf = TransformerFactory.newInstance();
+        
+        Transformer xsltProc = tf.newTransformer(
+                new StreamSource(new File("xmlschema/payments.xsl")));
+        
+        xsltProc.transform(
+                new StreamSource(new StringReader(document)), 
+                new StreamResult(new File(output)));
     }
 }
