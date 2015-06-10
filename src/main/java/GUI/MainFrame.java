@@ -9,12 +9,8 @@ import java.awt.Desktop;
 import java.awt.Image;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,11 +20,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.WindowConstants;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import project.Account;
 import project.AccountManagerImpl;
 import project.Category;
@@ -50,20 +48,17 @@ public class MainFrame extends javax.swing.JFrame {
     
    // private final ResourceBundle localization = ResourceBundle.getBundle("localization",new Locale("SK")); 
     private final ResourceBundle localization = ResourceBundle.getBundle("localization",Locale.US); 
-    private static AccountManagerImpl accountManager = new AccountManagerImpl();
-    private static PaymentManagerImpl paymentManager = new PaymentManagerImpl();
-    private static ExpenseManagerImpl expenseManager = new ExpenseManagerImpl();
-    private static CurrencyManagerImpl currencyManager = new CurrencyManagerImpl();
-    private static SubjectManagerImpl subjectManager = new SubjectManagerImpl();
-    private static CategoryManagerImpl categoryManager = new CategoryManagerImpl(); 
+    private static final AccountManagerImpl accountManager = new AccountManagerImpl();
+    private static final PaymentManagerImpl paymentManager = new PaymentManagerImpl();
+    private static final ExpenseManagerImpl expenseManager = new ExpenseManagerImpl();
+    private static final CurrencyManagerImpl currencyManager = new CurrencyManagerImpl();
+    private static final SubjectManagerImpl subjectManager = new SubjectManagerImpl();
+    private static final CategoryManagerImpl categoryManager = new CategoryManagerImpl(); 
     private List<Payment> toTable = new ArrayList<>();
     private BufferedWriter output;
     
     
-    
 
-    
-    
     //private JPaymentTableModel paymentTableModel;
     
     /**
@@ -73,7 +68,475 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
     }
+       
+    private enum AccountActions {
+        ADD_ACCOUNT, EDIT_ACCOUNT, REMOVE_ACCOUNT
+    };
+    
+    private class AccountSwingWorker extends SwingWorker<List<Account>, Void>{
+     
+        private AccountActions accountAction;
+        private final Account account;
+         
+        
+        public AccountSwingWorker(AccountActions action, Account account) {
+            this.accountAction = action;
+            this.account = account;
+        }
 
+
+        @Override
+        protected List<Account> doInBackground() throws Exception {
+            switch (accountAction) {
+                case ADD_ACCOUNT:{
+                    try {
+                        accountManager.createAccount(account);
+                        accountList.addItem(account);
+                        jComboBox1.addItem(account);
+                        jComboBox4.addItem(account);
+                        jComboBox9.addItem(account);
+
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_add_account"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return accountManager.findAllAccounts();
+                    }
+                
+                case EDIT_ACCOUNT:
+                    try {
+                        accountManager.updateAccount(account);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_update_account"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return accountManager.findAllAccounts();
+                
+                
+                case REMOVE_ACCOUNT:
+                    try {
+                        accountManager.deleteAccount(account.getId());
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_remove_account"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    return accountManager.findAllAccounts();
+                
+                default:
+                    throw new IllegalStateException("Default reached in doInBackground() AccountSwingWorker");
+            }
+        }
+        
+        @Override
+        protected void done() {
+            try {
+                if (null == get()) {
+                    accountAction = null;
+                    return;
+                }
+            } catch (ExecutionException ex) {
+                accountAction = null;
+                JOptionPane.showMessageDialog(rootPane,
+                        ex.getCause().getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InterruptedException ex) {
+                accountAction = null;
+                throw new IllegalStateException(localization.getString("interrupted"), ex);
+            }
+            switch (accountAction) {
+                case REMOVE_ACCOUNT:
+                    updateAccountLists();
+                    jWantDeleteAccount.dispose();
+                    jDeleteAccount.setVisible(false);
+                    break;
+                case ADD_ACCOUNT:
+                    jCreateAccount.dispose(); 
+                    break;
+                case EDIT_ACCOUNT:
+                    updateAccountLists();
+                    update();
+                    jUpdateAccount.setVisible(false);
+                    break;
+            }        
+            accountAction = null;
+        }
+         
+     }
+    
+    private enum CategoryActions{
+        ADD_CATEGORY, EDIT_CATEGORY, REMOVE_CATEGORY
+    };
+    
+    private class CategorySwingWorker extends SwingWorker<List<Category>, Void>{
+     
+        private CategoryActions categoryAction;
+        private final Category category;
+         
+        
+        public CategorySwingWorker(CategoryActions action, Category category) {
+            this.categoryAction = action;
+            this.category = category;
+        }
+
+
+        @Override
+        protected List<Category> doInBackground() throws Exception {
+            switch (categoryAction) {
+                case ADD_CATEGORY:{
+                    try {
+                        categoryManager.createCategory(category);
+                        jComboBox3.addItem(category);
+                        jComboBox6.addItem(category);
+                        jComboBox15.addItem(category);        
+                        jComboBox16.addItem(category);
+
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_add_category"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return categoryManager.findAllCategory();
+                    }
+                
+                case EDIT_CATEGORY:
+                    try {
+                        categoryManager.updateCategory(category);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_update_category"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return categoryManager.findAllCategory();
+                
+                
+                case REMOVE_CATEGORY:
+                    try {
+                        categoryManager.deleteCategory(category.getId());
+                        jComboBox3.removeItem(category);
+                        jComboBox6.removeItem(category);
+                        jComboBox15.removeItem(category);
+                        jComboBox16.removeItem(category);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_remove_category"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    return categoryManager.findAllCategory();
+                
+                default:
+                    throw new IllegalStateException("Default reached in doInBackground() CategorySwingWorker");
+            }
+        }
+        
+        @Override
+        protected void done() {
+            try {
+                if (null == get()) {
+                    categoryAction = null;
+                    return;
+                }
+            } catch (ExecutionException ex) {
+                categoryAction = null;
+                JOptionPane.showMessageDialog(rootPane,
+                        ex.getCause().getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InterruptedException ex) {
+                categoryAction = null;
+                throw new IllegalStateException(localization.getString("interrupted"), ex);
+            }
+            switch (categoryAction) {
+                case REMOVE_CATEGORY:
+                    jDeleteCategory.setVisible(false);
+                    break;
+                case ADD_CATEGORY:
+                    jAddCategory.setVisible(false); 
+                    break;
+                case EDIT_CATEGORY:
+                    Vector vec = new Vector<>(categoryManager.findAllCategory());
+                    jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(vec));
+                    jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(vec));
+                    jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(vec));
+                    jComboBox16.setModel(new javax.swing.DefaultComboBoxModel(vec));
+                    jUpdateCategory.setVisible(false);
+                    break;
+            }        
+            categoryAction = null;
+        }
+         
+     }
+
+    private enum CurrencyActions{
+        ADD_CURRENCY, REMOVE_CURRENCY
+    };
+    
+    private class CurrencySwingWorker extends SwingWorker<List<Currency>, Void>{
+     
+        private CurrencyActions currencyAction;
+        private final Currency currency;
+         
+        
+        public CurrencySwingWorker(CurrencyActions action, Currency Currency) {
+            this.currencyAction = action;
+            this.currency = Currency;
+        }
+
+
+        @Override
+        protected List<Currency> doInBackground() throws Exception {
+            switch (currencyAction) {
+                case ADD_CURRENCY:{
+                    try {
+                        currencyManager.createCurrency(currency);
+                        jComboBox8.addItem(currency);
+                        jComboBox11.addItem(currency);
+                        jComboBox12.addItem(currency);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_add_currency"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return currencyManager.findAllCurrency();
+                    }
+                
+                case REMOVE_CURRENCY:
+                    try {
+                        currencyManager.deleteCurrency(currency.getCcy());
+                        jComboBox8.removeItem(currency);
+                        jComboBox11.removeItem(currency);
+                        jComboBox12.removeItem(currency);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_remove_currency"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    return currencyManager.findAllCurrency();
+                
+                default:
+                    throw new IllegalStateException("Default reached in doInBackground() CurrencySwingWorker");
+            }
+        }
+        
+        @Override
+        protected void done() {
+            try {
+                if (null == get()) {
+                    currencyAction = null;
+                    return;
+                }
+            } catch (ExecutionException ex) {
+                currencyAction = null;
+                JOptionPane.showMessageDialog(rootPane,
+                        ex.getCause().getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InterruptedException ex) {
+                currencyAction = null;
+                throw new IllegalStateException(localization.getString("interrupted"), ex);
+            }
+            switch (currencyAction) {
+                case REMOVE_CURRENCY:
+                    jDeleteCurrency.setVisible(false);
+                    break;
+                case ADD_CURRENCY:
+                    jAddCurrency.dispose(); 
+                    break;
+            }        
+            currencyAction = null;
+        }
+         
+     }
+    
+    
+    private enum PaymentActions{
+        ADD_PAYMENT, EDIT_PAYMENT, REMOVE_PAYMENT
+    };
+    
+    private class PaymentSwingWorker extends SwingWorker<List<Payment>, Void>{
+     
+        private PaymentActions paymentAction;
+        private final Payment payment;
+         
+        
+        public PaymentSwingWorker(PaymentActions action, Payment payment) {
+            this.paymentAction = action;
+            this.payment = payment;
+        }
+
+
+        @Override
+        protected List<Payment> doInBackground() throws Exception {
+            switch (paymentAction) {
+                case ADD_PAYMENT:{
+                    try {
+                        paymentManager.createPayment(payment);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_add_payment"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return paymentManager.findAllPayments();
+                    }
+                
+                case EDIT_PAYMENT:
+                    try {
+                        paymentManager.updatePayment(payment);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_update_payment"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return paymentManager.findAllPayments();
+                
+                
+                case REMOVE_PAYMENT:
+                    try {
+                        paymentManager.deletePayment(payment.getId());
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_remove_payment"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    return paymentManager.findAllPayments();
+                
+                default:
+                    throw new IllegalStateException("Default reached in doInBackground() PaymentSwingWorker");
+            }
+        }
+        
+        @Override
+        protected void done() {
+            try {
+                if (null == get()) {
+                    paymentAction = null;
+                    return;
+                }
+            } catch (ExecutionException ex) {
+                paymentAction = null;
+                JOptionPane.showMessageDialog(rootPane,
+                        ex.getCause().getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InterruptedException ex) {
+                paymentAction = null;
+                throw new IllegalStateException(localization.getString("interrupted"), ex);
+            }
+            switch (paymentAction) {
+                case ADD_PAYMENT:
+                    update();
+                    jAddPayment.dispose(); 
+                    break;
+                case EDIT_PAYMENT:
+                    update();
+                    jUpdatePayment.dispose();
+                    break;
+            }        
+            paymentAction = null;
+        }
+         
+     }
+    
+    private enum SubjectActions{
+        ADD_SUBJECT, EDIT_SUBJECT, REMOVE_SUBJECT
+    };
+    
+    private class SubjectSwingWorker extends SwingWorker<List<Subject>, Void>{
+     
+        private SubjectActions subjectAction;
+        private final Subject subject;
+         
+        
+        public SubjectSwingWorker(SubjectActions action, Subject subject) {
+            this.subjectAction = action;
+            this.subject = subject;
+        }
+
+
+        @Override
+        protected List<Subject> doInBackground() throws Exception {
+            switch (subjectAction) {
+                case ADD_SUBJECT:{
+                    try {
+                        subjectManager.createSubject(subject);
+
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_add_subject"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return subjectManager.findAllSubjects();
+                    }
+                
+                case EDIT_SUBJECT:
+                    try {
+                        subjectManager.updateSubject(subject);
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_update_subject"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                    return subjectManager.findAllSubjects();
+                
+                
+                case REMOVE_SUBJECT:
+                    try {
+                        subjectManager.deleteSubject(subject.getId());
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(rootPane,
+                                localization.getString("cannot_remove_subject"),
+                                localization.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    return subjectManager.findAllSubjects();
+                
+                default:
+                    throw new IllegalStateException("Default reached in doInBackground() SubjectSwingWorker");
+            }
+        }
+        
+        @Override
+        protected void done() {
+            try {
+                if (null == get()) {
+                    subjectAction = null;
+                    return;
+                }
+            } catch (ExecutionException ex) {
+                subjectAction = null;
+                JOptionPane.showMessageDialog(rootPane,
+                        ex.getCause().getMessage(), ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InterruptedException ex) {
+                subjectAction = null;
+                throw new IllegalStateException(localization.getString("interrupted"), ex);
+            }
+            switch (subjectAction) {
+                case REMOVE_SUBJECT:
+                    jDeleteSubject.setVisible(false);
+                    updateSubjectLists(); 
+                    break;
+                case ADD_SUBJECT:
+                    updateSubjectLists();       
+                    jAddSubject.setVisible(false); 
+                    break;
+                case EDIT_SUBJECT:
+                    updateSubjectLists();            
+                    jUpdateSubject.setVisible(false);
+                    break;
+            }        
+            subjectAction = null;
+        }
+         
+     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,9 +703,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jAddPayment.setTitle(localization.getString("addPayment"));
         jAddPayment.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddPayment.setMaximumSize(new java.awt.Dimension(550, 300));
         jAddPayment.setMinimumSize(new java.awt.Dimension(550, 300));
-        jAddPayment.setPreferredSize(new java.awt.Dimension(550, 300));
         jAddPayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Account>(accountManager.findAllAccounts())));
@@ -577,9 +1038,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jUpdateSubject.setTitle(localization.getString("updateSubject"));
         jUpdateSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateSubject.setMaximumSize(new java.awt.Dimension(550, 300));
         jUpdateSubject.setMinimumSize(new java.awt.Dimension(550, 300));
-        jUpdateSubject.setPreferredSize(new java.awt.Dimension(550, 300));
         jUpdateSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(subjectManager.findAllSubjects())));
@@ -965,7 +1424,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
-        paymentManager.deletePayment(temp.getId());
+        new PaymentSwingWorker(PaymentActions.REMOVE_PAYMENT,temp).execute();
         update();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1066,10 +1525,7 @@ public class MainFrame extends javax.swing.JFrame {
         payment.setDescription(desc);
         payment.setAmount(amount);
         payment.setDate(jDateChooser1.getDate());
-        paymentManager.createPayment(payment);
-       // new MainApplication.PaymentSwingWorker(MainApplication.PaymentActions.ADD_PAYMENT, payment).execute();
-        update();
-        jAddPayment.dispose();
+        new PaymentSwingWorker(PaymentActions.ADD_PAYMENT, payment).execute();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1098,11 +1554,8 @@ public class MainFrame extends javax.swing.JFrame {
         payment.setCategoryId(((Category)jComboBox6.getSelectedItem()).getId());
         payment.setDescription(desc);
         payment.setAmount(amount);
-        payment.setDate(jDateChooser4.getDate());
-        paymentManager.updatePayment(payment);        
-       // new MainApplication.PaymentSwingWorker(MainApplication.PaymentActions.UPDATE_PAYMENT, payment).execute();
-        update();
-        jUpdatePayment.dispose();
+        payment.setDate(jDateChooser4.getDate());       
+        new PaymentSwingWorker(PaymentActions.EDIT_PAYMENT, payment).execute();
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1137,23 +1590,14 @@ public class MainFrame extends javax.swing.JFrame {
          temp.setDescription(jTextField6.getText());
          temp.setCreationDate(jDateChooser5.getDate());
          temp.setCurrency((jComboBox8.getSelectedItem().toString()));
-         accountManager.createAccount(temp);
-         accountList.addItem(temp);
-         jComboBox1.addItem(temp);
-         jComboBox4.addItem(temp);
-         jComboBox9.addItem(temp);
-         jCreateAccount.dispose();         
+         new AccountSwingWorker(AccountActions.ADD_ACCOUNT,temp).execute();      
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
        Currency temp = new Currency();
        temp.setCcy(jTextField8.getText());
        temp.setCcyName(jTextField9.getText());
-       currencyManager.createCurrency(temp);
-       jComboBox8.addItem(temp);
-       jComboBox11.addItem(temp);
-       jComboBox12.addItem(temp);
-       jAddCurrency.dispose();
+       new CurrencySwingWorker(CurrencyActions.ADD_CURRENCY,temp).execute();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -1173,14 +1617,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         List<Payment> temp = paymentManager.findAllPayments();
         Long id = ((Account)jComboBox9.getSelectedItem()).getId();
-        for(int i=0; i<temp.size(); i++)
-            if (temp.get(i).getAccountId().equals(id))
-                paymentManager.deletePayment(temp.get(i).getId());
-        
-        accountManager.deleteAccount(id);
-        updateAccountLists();
-        jWantDeleteAccount.dispose();
-        jDeleteAccount.setVisible(false);
+        for (Payment temp1 : temp) {
+            if (temp1.getAccountId().equals(id)) {
+                new PaymentSwingWorker(PaymentActions.REMOVE_PAYMENT,temp1).execute();
+            }
+        }
+        new AccountSwingWorker(AccountActions.REMOVE_ACCOUNT,accountManager.getAccountById(id)).execute();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1205,11 +1647,8 @@ public class MainFrame extends javax.swing.JFrame {
        temp.setName(jTextField11.getText());
        temp.setDescription(jTextField10.getText());
        temp.setCreationDate(jDateChooser6.getDate());
-       temp.setCurrency(((Currency)jComboBox11.getSelectedItem()).getCcy());  
-       accountManager.updateAccount(temp);
-       updateAccountLists();
-       update();
-       jUpdateAccount.setVisible(false);
+       temp.setCurrency(((Currency)jComboBox11.getSelectedItem()).getCcy()); 
+       new AccountSwingWorker(AccountActions.EDIT_ACCOUNT,temp).execute();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -1231,19 +1670,16 @@ public class MainFrame extends javax.swing.JFrame {
         Currency temp = (Currency)jComboBox12.getSelectedItem();
         List acc = accountManager.findAllAccounts();
         boolean check = true; 
-        for(int i=0; i<acc.size(); i++)
-            if (((Account)acc.get(i)).getCurrency().equals(temp.getCcy())){
+        for (Object acc1 : acc) {
+            if (((Account) acc1).getCurrency().equals(temp.getCcy())) {
                 jUsedCurrency.setVisible(true); 
                 check = false;
                 break;
             }        
+        }
         
         if(check){
-            currencyManager.deleteCurrency(temp.getCcy());        
-            jDeleteCurrency.setVisible(false);
-            jComboBox8.removeItem(temp);
-            jComboBox11.removeItem(temp);
-            jComboBox12.removeItem(temp);
+            new CurrencySwingWorker(CurrencyActions.REMOVE_CURRENCY,temp).execute();
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -1262,9 +1698,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         Subject temp = new Subject();
         temp.setName(jTextField13.getText());
-        subjectManager.createSubject(temp);
-        updateSubjectLists();       
-        jAddSubject.setVisible(false);
+        new SubjectSwingWorker(SubjectActions.ADD_SUBJECT,temp).execute();
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -1276,17 +1710,16 @@ public class MainFrame extends javax.swing.JFrame {
         Subject temp = (Subject)jComboBox13.getSelectedItem();
         List payments = paymentManager.findAllPayments();
         boolean check = true; 
-        for(int i=0; i<payments.size(); i++)
-            if (((Payment)payments.get(i)).getSubjectId().equals(temp.getId())){
+        for (Object payment : payments) {
+            if (((Payment) payment).getSubjectId().equals(temp.getId())) {
                 jUsedSubject.setVisible(true); 
                 check = false;
                 break;
             }        
+        }
         
         if(check){
-            subjectManager.deleteSubject(temp.getId());
-            jDeleteSubject.setVisible(false);
-            updateSubjectLists(); 
+            new SubjectSwingWorker(SubjectActions.REMOVE_SUBJECT,temp).execute(); 
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
@@ -1296,10 +1729,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
             Subject temp = (Subject)jComboBox13.getSelectedItem();
-            temp.setName(jTextField5.getText());            
-            subjectManager.updateSubject(temp);
-            updateSubjectLists();            
-            jUpdateSubject.setVisible(false);
+            temp.setName(jTextField5.getText());
+            new SubjectSwingWorker(SubjectActions.EDIT_SUBJECT,temp).execute();
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -1309,13 +1740,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
            Category temp = new Category();
         temp.setName(jTextField14.getText());
-        categoryManager.createCategory(temp);
-        
-        jComboBox3.addItem(temp);
-        jComboBox6.addItem(temp);
-        jComboBox15.addItem(temp);        
-        jComboBox16.addItem(temp);        
-        jAddCategory.setVisible(false);
+        new CategorySwingWorker(CategoryActions.ADD_CATEGORY,temp).execute();
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
@@ -1325,33 +1750,23 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
             Category temp = (Category)jComboBox15.getSelectedItem();
             temp.setName(jTextField12.getText());
-            Vector vec = new Vector<>(categoryManager.findAllCategory());
-            categoryManager.updateCategory(temp);
-            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(vec));
-            jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(vec));
-            jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(vec));
-            jComboBox16.setModel(new javax.swing.DefaultComboBoxModel(vec));
-            jUpdateCategory.setVisible(false);
+            new CategorySwingWorker(CategoryActions.EDIT_CATEGORY,temp).execute();           
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         Category temp = (Category)jComboBox16.getSelectedItem();
         List payments = paymentManager.findAllPayments();
         boolean check = true; 
-        for(int i=0; i<payments.size(); i++)
-            if (((Payment)payments.get(i)).getCategoryId().equals(temp.getId())){
+        for (Object payment : payments) {
+            if (((Payment) payment).getCategoryId().equals(temp.getId())) {
                 jUsedCategory.setVisible(true); 
                 check = false;
                 break;
             }        
+        }
         
         if(check){
-            categoryManager.deleteCategory(temp.getId());
-            jDeleteCategory.setVisible(false);
-            jComboBox3.removeItem(temp);
-            jComboBox6.removeItem(temp);
-            jComboBox15.removeItem(temp);
-            jComboBox16.removeItem(temp);            
+            new CategorySwingWorker(CategoryActions.REMOVE_CATEGORY,temp).execute();            
         }
     }//GEN-LAST:event_jButton24ActionPerformed
 
@@ -1364,19 +1779,18 @@ public class MainFrame extends javax.swing.JFrame {
             String path = new Date().toString().substring(4, 20).replaceAll(" ","").replaceAll(":","");
             
             File file = new File("xml-out/"+path+".xml");
-            PrintWriter writer = new PrintWriter(file);
-            writer.write(expenseManager.createXML(((JPaymentTableModel)paymentTableModel.getModel()).getPayments()));                    
-            
-            if(Desktop.isDesktopSupported())
-            {
-                try {
-                    Desktop.getDesktop().browse(new URI("file:///"+file.getAbsolutePath().replaceAll("\\\\", "/")));
-                } catch (URISyntaxException | IOException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            try (PrintWriter writer = new PrintWriter(file)) {
+                writer.write(expenseManager.createXML(((JPaymentTableModel)paymentTableModel.getModel()).getPayments()));
+                
+                if(Desktop.isDesktopSupported())
+                {
+                    try {
+                        Desktop.getDesktop().browse(new URI("file:///"+file.getAbsolutePath().replaceAll("\\\\", "/")));
+                    } catch (URISyntaxException | IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }                
-        
-            writer.close();
+            }
             }catch(Exception e){
                 System.out.println("Could not create file");
             }                  
@@ -1410,19 +1824,16 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainFrame().setVisible(true);
                 
