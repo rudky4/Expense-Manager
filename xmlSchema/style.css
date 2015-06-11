@@ -68,7 +68,7 @@ div{
 
 .pageColumnLeft{
         position: fixed;
-        top: 5em;
+        top: 1em;
         left: 20px;
 	background-color : #ebebeb;
 	float : left;

@@ -155,7 +155,7 @@ public class MainFrame extends javax.swing.JFrame {
                     jDeleteAccount.setVisible(false);
                     break;
                 case ADD_ACCOUNT:
-                    jCreateAccount.dispose(); 
+                    jAddAccount.dispose(); 
                     break;
                 case EDIT_ACCOUNT:
                     updateAccountLists();
@@ -560,9 +560,11 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
         jInvalidPayment = new javax.swing.JDialog();
         jLabel10 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jLabel62 = new javax.swing.JLabel();
         jUpdatePayment = new javax.swing.JFrame();
         jComboBox4 = new javax.swing.JComboBox();
         jComboBox5 = new javax.swing.JComboBox();
@@ -577,7 +579,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jCreateAccount = new javax.swing.JFrame();
+        jLabel44 = new javax.swing.JLabel();
+        jAddAccount = new javax.swing.JFrame();
         jComboBox8 = new javax.swing.JComboBox();
         jDateChooser5 = new com.toedter.calendar.JDateChooser();
         jButton9 = new javax.swing.JButton();
@@ -587,21 +590,25 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
         jAddCurrency = new javax.swing.JFrame();
         jButton10 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
         jWantDeleteAccount = new javax.swing.JDialog();
         jLabel21 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jLabel63 = new javax.swing.JLabel();
         jDeleteAccount = new javax.swing.JFrame();
         jComboBox9 = new javax.swing.JComboBox();
         jButton14 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
         jUpdateAccount = new javax.swing.JFrame();
         jComboBox10 = new javax.swing.JComboBox();
         jDateChooser6 = new com.toedter.calendar.JDateChooser();
@@ -614,47 +621,68 @@ public class MainFrame extends javax.swing.JFrame {
         jTextField11 = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jComboBox11 = new javax.swing.JComboBox();
+        jLabel51 = new javax.swing.JLabel();
         jDeleteCurrency = new javax.swing.JFrame();
         jComboBox12 = new javax.swing.JComboBox();
         jButton16 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
         jUsedCurrency = new javax.swing.JDialog();
         jLabel31 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
+        jLabel65 = new javax.swing.JLabel();
         jAddSubject = new javax.swing.JFrame();
         jButton18 = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
+        jLabel54 = new javax.swing.JLabel();
         jDeleteSubject = new javax.swing.JFrame();
         jComboBox13 = new javax.swing.JComboBox();
         jButton19 = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
         jUsedSubject = new javax.swing.JDialog();
         jLabel34 = new javax.swing.JLabel();
         jButton20 = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
         jUpdateSubject = new javax.swing.JFrame();
         jComboBox14 = new javax.swing.JComboBox();
         jButton21 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jLabel56 = new javax.swing.JLabel();
         jAddCategory = new javax.swing.JFrame();
         jButton22 = new javax.swing.JButton();
         jLabel37 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
         jUpdateCategory = new javax.swing.JFrame();
         jComboBox15 = new javax.swing.JComboBox();
         jButton23 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
+        jLabel60 = new javax.swing.JLabel();
         jDeleteCategory = new javax.swing.JFrame();
         jComboBox16 = new javax.swing.JComboBox();
         jButton24 = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
         jUsedCategory = new javax.swing.JDialog();
         jLabel41 = new javax.swing.JLabel();
         jButton25 = new javax.swing.JButton();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jChoosePayment = new javax.swing.JDialog();
+        jLabel49 = new javax.swing.JLabel();
+        jButton26 = new javax.swing.JButton();
+        jLabel68 = new javax.swing.JLabel();
+        jAbout = new javax.swing.JFrame();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jButton27 = new javax.swing.JButton();
         accountList = new javax.swing.JComboBox();
         subjectList = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -672,7 +700,7 @@ public class MainFrame extends javax.swing.JFrame {
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jButton5 = new javax.swing.JButton();
         try {
-            Image img = ImageIO.read(new File("3rd/refresh.png"));
+            Image img = ImageIO.read(new File("src/main/java/GUI/img/refresh.png"));
             jButton5.setIcon(new ImageIcon(img));
         } catch (IOException ex) {
         }
@@ -698,7 +726,6 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
 
         jAddPayment.setTitle(localization.getString("addPayment"));
@@ -751,11 +778,16 @@ public class MainFrame extends javax.swing.JFrame {
         jAddPayment.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
         jAddPayment.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
 
-        jInvalidPayment.setMinimumSize(new java.awt.Dimension(300, 150));
+        jLabel42.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/payment.png"));
+        jAddPayment.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 90));
+
+        jInvalidPayment.setMaximumSize(new java.awt.Dimension(400, 150));
+        jInvalidPayment.setMinimumSize(new java.awt.Dimension(400, 150));
+        jInvalidPayment.setPreferredSize(new java.awt.Dimension(400, 150));
         jInvalidPayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setText(localization.getString("non_valid_payment"));
-        jInvalidPayment.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 380, 30));
+        jInvalidPayment.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 380, 30));
 
         jButton7.setText(localization.getString("close"));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -763,7 +795,10 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jInvalidPayment.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, -1));
+        jInvalidPayment.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 190, -1));
+
+        jLabel62.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jInvalidPayment.getContentPane().add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
         jUpdatePayment.setTitle(localization.getString("updatePayment"));
         jUpdatePayment.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -810,14 +845,20 @@ public class MainFrame extends javax.swing.JFrame {
         jUpdatePayment.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
         jUpdatePayment.getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
 
-        jCreateAccount.setTitle(localization.getString("createAccount"));
-        jCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jCreateAccount.setMinimumSize(new java.awt.Dimension(550, 300));
-        jCreateAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel44.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/update.png"));
+        jUpdatePayment.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 90));
+
+        jAddAccount.setTitle(localization.getString("createAccount"));
+        jAddAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jAddAccount.setMaximumSize(new java.awt.Dimension(550, 270));
+        jAddAccount.setMinimumSize(new java.awt.Dimension(550, 270));
+        jAddAccount.setPreferredSize(new java.awt.Dimension(550, 270));
+        jAddAccount.setResizable(false);
+        jAddAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Currency>(currencyManager.findAllCurrency())));
-        jCreateAccount.getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 320, 30));
-        jCreateAccount.getContentPane().add(jDateChooser5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 300, 30));
+        jAddAccount.getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 320, 30));
+        jAddAccount.getContentPane().add(jDateChooser5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 300, 30));
 
         jButton9.setText(localization.getString("createAccount"));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -825,21 +866,24 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jCreateAccount.getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 200, 30));
+        jAddAccount.getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 200, 30));
 
         jLabel17.setText(localization.getString("description"));
-        jCreateAccount.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        jAddAccount.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
         jLabel18.setText(localization.getString("currency"));
-        jCreateAccount.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+        jAddAccount.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jLabel20.setText(localization.getString("creationDate"));
-        jCreateAccount.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        jAddAccount.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
 
         jLabel22.setText(localization.getString("name"));
-        jCreateAccount.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
-        jCreateAccount.getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 320, 30));
-        jCreateAccount.getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
+        jAddAccount.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        jAddAccount.getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 320, 30));
+        jAddAccount.getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 320, 30));
+
+        jLabel45.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/account.png"));
+        jAddAccount.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 90));
 
         jAddCurrency.setTitle(localization.getString("addCurrency"));
         jAddCurrency.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -862,11 +906,16 @@ public class MainFrame extends javax.swing.JFrame {
         jAddCurrency.getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 270, 30));
         jAddCurrency.getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 270, 30));
 
-        jWantDeleteAccount.setMinimumSize(new java.awt.Dimension(300, 150));
+        jLabel46.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/currency.png"));
+        jAddCurrency.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 80, 90));
+
+        jWantDeleteAccount.setMaximumSize(new java.awt.Dimension(550, 150));
+        jWantDeleteAccount.setMinimumSize(new java.awt.Dimension(550, 150));
+        jWantDeleteAccount.setPreferredSize(new java.awt.Dimension(550, 150));
         jWantDeleteAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setText(localization.getString("wantDeleteAccount"));
-        jWantDeleteAccount.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 380, 30));
+        jWantDeleteAccount.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 380, 30));
 
         jButton11.setText(localization.getString("close"));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -874,7 +923,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jWantDeleteAccount.getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 120, -1));
+        jWantDeleteAccount.getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 120, -1));
 
         jButton12.setText(localization.getString("yes"));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -882,7 +931,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        jWantDeleteAccount.getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, -1));
+        jWantDeleteAccount.getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 120, -1));
 
         jButton13.setText(localization.getString("no"));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -890,11 +939,16 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        jWantDeleteAccount.getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 120, -1));
+        jWantDeleteAccount.getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 120, -1));
+
+        jLabel63.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jWantDeleteAccount.getContentPane().add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
         jDeleteAccount.setTitle(localization.getString("deleteAccount"));
         jDeleteAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteAccount.setMinimumSize(new java.awt.Dimension(550, 300));
+        jDeleteAccount.setMaximumSize(new java.awt.Dimension(550, 150));
+        jDeleteAccount.setMinimumSize(new java.awt.Dimension(550, 150));
+        jDeleteAccount.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Account>(accountManager.findAllAccounts())));
@@ -906,14 +960,19 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        jDeleteAccount.getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
+        jDeleteAccount.getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
         jLabel25.setText(localization.getString("account"));
         jDeleteAccount.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
+        jLabel48.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
+        jDeleteAccount.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 90));
+
         jUpdateAccount.setTitle(localization.getString("updateAccount"));
         jUpdateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateAccount.setMinimumSize(new java.awt.Dimension(550, 300));
+        jUpdateAccount.setMaximumSize(new java.awt.Dimension(550, 350));
+        jUpdateAccount.setMinimumSize(new java.awt.Dimension(550, 350));
+        jUpdateAccount.setPreferredSize(new java.awt.Dimension(550, 350));
         jUpdateAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(accountManager.findAllAccounts())));
@@ -953,9 +1012,14 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Currency>(currencyManager.findAllCurrency())));
         jUpdateAccount.getContentPane().add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 320, 30));
 
+        jLabel51.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/update.png"));
+        jUpdateAccount.getContentPane().add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 90));
+
         jDeleteCurrency.setTitle(localization.getString("deleteCurrency"));
         jDeleteCurrency.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteCurrency.setMinimumSize(new java.awt.Dimension(550, 300));
+        jDeleteCurrency.setMaximumSize(new java.awt.Dimension(550, 150));
+        jDeleteCurrency.setMinimumSize(new java.awt.Dimension(550, 150));
+        jDeleteCurrency.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteCurrency.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(currencyManager.findAllCurrency())));
@@ -967,16 +1031,21 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        jDeleteCurrency.getContentPane().add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
+        jDeleteCurrency.getContentPane().add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
         jLabel30.setText(localization.getString("currency"));
         jDeleteCurrency.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
-        jUsedCurrency.setMinimumSize(new java.awt.Dimension(300, 150));
+        jLabel53.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
+        jDeleteCurrency.getContentPane().add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
+
+        jUsedCurrency.setMaximumSize(new java.awt.Dimension(600, 150));
+        jUsedCurrency.setMinimumSize(new java.awt.Dimension(600, 150));
+        jUsedCurrency.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedCurrency.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setText(localization.getString("usedCurrency"));
-        jUsedCurrency.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 510, 30));
+        jUsedCurrency.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 510, 30));
 
         jButton17.setText(localization.getString("close"));
         jButton17.addActionListener(new java.awt.event.ActionListener() {
@@ -984,11 +1053,16 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton17ActionPerformed(evt);
             }
         });
-        jUsedCurrency.getContentPane().add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, -1));
+        jUsedCurrency.getContentPane().add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 190, -1));
+
+        jLabel65.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jUsedCurrency.getContentPane().add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
         jAddSubject.setTitle(localization.getString("addSubject"));
         jAddSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddSubject.setMinimumSize(new java.awt.Dimension(500, 200));
+        jAddSubject.setMaximumSize(new java.awt.Dimension(550, 150));
+        jAddSubject.setMinimumSize(new java.awt.Dimension(550, 150));
+        jAddSubject.setPreferredSize(new java.awt.Dimension(550, 150));
         jAddSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton18.setText(localization.getString("addSubject"));
@@ -997,15 +1071,20 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton18ActionPerformed(evt);
             }
         });
-        jAddSubject.getContentPane().add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 200, 30));
+        jAddSubject.getContentPane().add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
 
         jLabel33.setText(localization.getString("name"));
         jAddSubject.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
         jAddSubject.getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 270, 30));
 
+        jLabel54.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/subject.png"));
+        jAddSubject.getContentPane().add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
+
         jDeleteSubject.setTitle(localization.getString("deleteSubject"));
         jDeleteSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteSubject.setMinimumSize(new java.awt.Dimension(550, 300));
+        jDeleteSubject.setMaximumSize(new java.awt.Dimension(550, 150));
+        jDeleteSubject.setMinimumSize(new java.awt.Dimension(550, 150));
+        jDeleteSubject.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(subjectManager.findAllSubjects())));
@@ -1017,16 +1096,22 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton19ActionPerformed(evt);
             }
         });
-        jDeleteSubject.getContentPane().add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
+        jDeleteSubject.getContentPane().add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
         jLabel32.setText(localization.getString("subject"));
         jDeleteSubject.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
-        jUsedSubject.setMinimumSize(new java.awt.Dimension(300, 150));
+        jLabel55.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
+        jDeleteSubject.getContentPane().add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
+
+        jUsedSubject.setMaximumSize(new java.awt.Dimension(600, 150));
+        jUsedSubject.setMinimumSize(new java.awt.Dimension(600, 150));
+        jUsedSubject.setModal(true);
+        jUsedSubject.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel34.setText(localization.getString("usedSubject"));
-        jUsedSubject.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 510, 30));
+        jUsedSubject.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 510, 30));
 
         jButton20.setText(localization.getString("close"));
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -1034,11 +1119,16 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton20ActionPerformed(evt);
             }
         });
-        jUsedSubject.getContentPane().add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, -1));
+        jUsedSubject.getContentPane().add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 190, -1));
+
+        jLabel66.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jUsedSubject.getContentPane().add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
         jUpdateSubject.setTitle(localization.getString("updateSubject"));
         jUpdateSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateSubject.setMinimumSize(new java.awt.Dimension(550, 300));
+        jUpdateSubject.setMaximumSize(new java.awt.Dimension(550, 220));
+        jUpdateSubject.setMinimumSize(new java.awt.Dimension(550, 220));
+        jUpdateSubject.setPreferredSize(new java.awt.Dimension(550, 220));
         jUpdateSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(subjectManager.findAllSubjects())));
@@ -1050,7 +1140,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton21ActionPerformed(evt);
             }
         });
-        jUpdateSubject.getContentPane().add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 30));
+        jUpdateSubject.getContentPane().add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 200, 30));
 
         jLabel35.setText(localization.getString("name"));
         jUpdateSubject.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
@@ -1059,9 +1149,14 @@ public class MainFrame extends javax.swing.JFrame {
         jUpdateSubject.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
         jUpdateSubject.getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 320, 30));
 
+        jLabel56.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/update.png"));
+        jUpdateSubject.getContentPane().add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 80, 90));
+
         jAddCategory.setTitle(localization.getString("addCategory"));
         jAddCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddCategory.setMinimumSize(new java.awt.Dimension(500, 200));
+        jAddCategory.setMaximumSize(new java.awt.Dimension(550, 150));
+        jAddCategory.setMinimumSize(new java.awt.Dimension(550, 150));
+        jAddCategory.setPreferredSize(new java.awt.Dimension(550, 150));
         jAddCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton22.setText(localization.getString("addCategory"));
@@ -1070,7 +1165,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton22ActionPerformed(evt);
             }
         });
-        jAddCategory.getContentPane().add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 200, 30));
+        jAddCategory.getContentPane().add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
 
         jLabel37.setText(localization.getString("category"));
         jAddCategory.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
@@ -1080,11 +1175,16 @@ public class MainFrame extends javax.swing.JFrame {
                 jTextField14ActionPerformed(evt);
             }
         });
-        jAddCategory.getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 270, 30));
+        jAddCategory.getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 330, 30));
+
+        jLabel57.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/category.png"));
+        jAddCategory.getContentPane().add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
 
         jUpdateCategory.setTitle(localization.getString("updateCategory"));
         jUpdateCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateCategory.setMinimumSize(new java.awt.Dimension(550, 300));
+        jUpdateCategory.setMaximumSize(new java.awt.Dimension(550, 200));
+        jUpdateCategory.setMinimumSize(new java.awt.Dimension(550, 200));
+        jUpdateCategory.setPreferredSize(new java.awt.Dimension(550, 200));
         jUpdateCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(categoryManager.findAllCategory())));
@@ -1096,7 +1196,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton23ActionPerformed(evt);
             }
         });
-        jUpdateCategory.getContentPane().add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 30));
+        jUpdateCategory.getContentPane().add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 200, 30));
 
         jLabel38.setText(localization.getString("name"));
         jUpdateCategory.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
@@ -1105,9 +1205,14 @@ public class MainFrame extends javax.swing.JFrame {
         jUpdateCategory.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
         jUpdateCategory.getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 320, 30));
 
+        jLabel60.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/update.png"));
+        jUpdateCategory.getContentPane().add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 90));
+
         jDeleteCategory.setTitle(localization.getString("deleteCategory"));
         jDeleteCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteCategory.setMinimumSize(new java.awt.Dimension(550, 300));
+        jDeleteCategory.setMaximumSize(new java.awt.Dimension(550, 150));
+        jDeleteCategory.setMinimumSize(new java.awt.Dimension(550, 150));
+        jDeleteCategory.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox16.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(categoryManager.findAllCategory())));
@@ -1119,16 +1224,22 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton24ActionPerformed(evt);
             }
         });
-        jDeleteCategory.getContentPane().add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 200, 30));
+        jDeleteCategory.getContentPane().add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
         jLabel40.setText(localization.getString("category"));
         jDeleteCategory.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
-        jUsedCategory.setMinimumSize(new java.awt.Dimension(300, 150));
+        jLabel61.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
+        jDeleteCategory.getContentPane().add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
+
+        jUsedCategory.setLocationByPlatform(true);
+        jUsedCategory.setMaximumSize(new java.awt.Dimension(600, 150));
+        jUsedCategory.setMinimumSize(new java.awt.Dimension(600, 150));
+        jUsedCategory.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel41.setText(localization.getString("usedCategory"));
-        jUsedCategory.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 510, 30));
+        jUsedCategory.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 510, 30));
 
         jButton25.setText(localization.getString("close"));
         jButton25.addActionListener(new java.awt.event.ActionListener() {
@@ -1136,7 +1247,79 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton25ActionPerformed(evt);
             }
         });
-        jUsedCategory.getContentPane().add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, -1));
+        jUsedCategory.getContentPane().add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 190, -1));
+
+        jLabel67.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jUsedCategory.getContentPane().add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
+
+        jLabel43.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/payment.png"));
+
+        jLabel47.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/currency.png"));
+
+        jChoosePayment.setMaximumSize(new java.awt.Dimension(400, 150));
+        jChoosePayment.setMinimumSize(new java.awt.Dimension(400, 150));
+        jChoosePayment.setPreferredSize(new java.awt.Dimension(400, 150));
+        jChoosePayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel49.setText(localization.getString("choose"));
+        jChoosePayment.getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 380, 30));
+
+        jButton26.setText(localization.getString("close"));
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
+        jChoosePayment.getContentPane().add(jButton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 190, -1));
+
+        jLabel68.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
+        jChoosePayment.getContentPane().add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
+
+        jAbout.setTitle("About");
+        jAbout.setMaximumSize(new java.awt.Dimension(520, 350));
+        jAbout.setMinimumSize(new java.awt.Dimension(520, 350));
+        jAbout.setPreferredSize(new java.awt.Dimension(520, 350));
+
+        jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(10);
+        jTextArea2.setText("Expense-Manager\n\nThe application manages individual accounts and payments, also records subjects with whom there are ongoing payment transactions. Based on the data obtained allows generation of reports for a certain period, for individual accounts, for each entity etc. The purpose is to increase the visibility and facilitate the work with a large number of payment transactions on different accounts.\n\nCreated by:\nOndrěj Grůza - @levejhak\nRudolf Kvašövský - @rudky4\nAndrea Turiaková - @charlliz\nMarek Zvolánek - @zvolas8\n\nThis project has been develeped for course PB138 Modern Markup Languages. (c) 2015");
+        jTextArea2.setToolTipText("");
+        jTextArea2.setWrapStyleWord(true);
+        jTextArea2.setBorder(null);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jButton27.setText("Close");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jAboutLayout = new javax.swing.GroupLayout(jAbout.getContentPane());
+        jAbout.getContentPane().setLayout(jAboutLayout);
+        jAboutLayout.setHorizontalGroup(
+            jAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jAboutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
+            .addGroup(jAboutLayout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(jButton27)
+                .addContainerGap(237, Short.MAX_VALUE))
+        );
+        jAboutLayout.setVerticalGroup(
+            jAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jAboutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton27)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ExpenseUlimate Manager");
@@ -1243,11 +1426,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCheckBox1.setText("Use Date");
         jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
         jMenu2.setText("File");
@@ -1381,10 +1559,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu1.setText("Help");
 
-        jMenuItem15.setText("Help");
-        jMenu1.add(jMenuItem15);
-
         jMenuItem16.setText("About");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem16);
 
         jMenuBar1.add(jMenu1);
@@ -1423,14 +1603,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(paymentTableModel.getSelectedRow() == -1){
+            jChoosePayment.setVisible(true);
+        } else {
         Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
         new PaymentSwingWorker(PaymentActions.REMOVE_PAYMENT,temp).execute();
         update();
+        }        
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jDateChooser1.setDate(new Date());
@@ -1560,14 +1740,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Payment temp;
-        try{
-           temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
-        } catch (Exception e){
-            paymentTableModel.setRowSelectionInterval(0, 0);
-            temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
-        }
-        
+        if(paymentTableModel.getSelectedRow() == -1){
+            jChoosePayment.setVisible(true);
+        } else {        
+        Payment temp = ((JPaymentTableModel)paymentTableModel.getModel()).getRow(paymentTableModel.getSelectedRow());
         jTextField4.setText(temp.getDescription());
         jTextField3.setText(temp.getAmount().toString());
         jComboBox4.setSelectedItem(accountManager.getAccountById(temp.getAccountId()));
@@ -1575,13 +1751,14 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox6.setSelectedItem(categoryManager.getCategoryById(temp.getCategoryId()));
         jDateChooser4.setDate(temp.getDate());
         jUpdatePayment.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         jTextField6.setText("");
         jTextField7.setText("");
         jDateChooser5.setDate(new Date());        
-        jCreateAccount.setVisible(true);
+        jAddAccount.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1623,6 +1800,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         new AccountSwingWorker(AccountActions.REMOVE_ACCOUNT,accountManager.getAccountById(id)).execute();
+        updateAccountLists();
+        update();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1808,6 +1987,18 @@ public class MainFrame extends javax.swing.JFrame {
         jUpdateCategory.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        jChoosePayment.dispose();
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+         jAbout.setVisible(true);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        jAbout.setVisible(false);
+    }//GEN-LAST:event_jButton27ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1843,6 +2034,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox accountList;
+    private javax.swing.JFrame jAbout;
+    private javax.swing.JFrame jAddAccount;
     private javax.swing.JFrame jAddCategory;
     private javax.swing.JFrame jAddCurrency;
     private javax.swing.JFrame jAddPayment;
@@ -1865,6 +2058,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1873,6 +2068,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JDialog jChoosePayment;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
@@ -1888,7 +2084,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox6;
     private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jComboBox9;
-    private javax.swing.JFrame jCreateAccount;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -1936,8 +2131,30 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1954,7 +2171,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1966,7 +2182,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
