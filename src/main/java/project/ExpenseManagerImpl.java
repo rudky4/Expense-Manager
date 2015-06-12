@@ -203,7 +203,12 @@ private AccountManager accountManager = new AccountManagerImpl();
         return result;
     }
     
-
+    /**
+     * Create html output from xml document
+     * 
+     * @param document
+     * @param output
+     */
     public static void createHTML(String document, String output) throws TransformerConfigurationException, TransformerException {
         
         TransformerFactory tf = TransformerFactory.newInstance();

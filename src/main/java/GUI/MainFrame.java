@@ -1939,6 +1939,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        jTextField14.setText("");
         jAddCategory.setVisible(true);    
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
