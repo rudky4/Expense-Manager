@@ -14,25 +14,25 @@ import java.util.List;
 public interface CurrencyManager {
     
     /**
-     * function checks all parameters and create account 
+     * function checks all parameters and create currency 
      * @param currency
      */
     public void createCurrency(Currency currency);
     
     /**
-     * function deletes account 
+     * function deletes currency 
      * @param ccy 
      */
     public void deleteCurrency(String ccy);
     
     /**
-     * function finds all accounts
+     * function finds all currencies
      * @return List of currency
      */
     public List<Currency> findAllCurrency();
     
     /**
-     * function finds accout by id
+     * function finds currency by id
      * @param ccy
      * @return currency
      */

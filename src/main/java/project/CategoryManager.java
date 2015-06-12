@@ -14,31 +14,31 @@ import java.util.List;
 public interface CategoryManager {
 
     /**
-     * function checks all parameters and create account 
+     * function checks all parameters and create category 
      * @param category
      */
     public void createCategory(Category category);
 
     /**
-     * function checks all parameter and updates account 
+     * function checks all parameter and updates category 
      * @param category
      */
     public void updateCategory(Category category);
 
     /**
-     * function deletes account 
+     * function deletes category 
      * @param id 
      */
     public void deleteCategory(Long id);
 
     /**
-     * function finds all accounts
+     * function finds all categories
      * @return List of category
      */
     public List<Category> findAllCategory();
     
     /**
-     * function finds accout by id
+     * function finds category by id
      * @param id
      * @return Category
      */
