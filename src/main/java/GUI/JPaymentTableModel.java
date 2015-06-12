@@ -42,6 +42,7 @@ public class JPaymentTableModel extends AbstractTableModel {
     public JPaymentTableModel(ResourceBundle localization){
         this.localization = localization;        
         List<Payment> list = manager.findAllPayments();
+        this.refresh(list);
     }
     
     /**

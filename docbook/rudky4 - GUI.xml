@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>GUI pre Expense-Manager</title>
+        <subtitle>Správa o práci na projekte z predmetu PB138</subtitle>
+        <orgname>Fakulta informatiky Masarykovej univerzity v Brne</orgname>
+        <author>
+            <personname>
+                <firstname>Rudolf</firstname>
+                <surname>Kvašňovský, učo 422581</surname>
+            </personname>
+            <address>
+                <street>Botanická 68a</street>
+                <postcode>60200</postcode>
+                <city>Brno</city>
+                <country>Česká republika</country>
+            </address>
+            <email>rudolf.kvasnovsky@gmail.com</email>
+        </author>
+    </info>
+    <sect1>
+        <title>O projekte</title>
+        <para>Aplikácia spravuje jednotlivé účty a platby, ktoré jednoduchým spôsobom užívateľ pridáva do systému.
+		Taktiež zaznamenáva subjekty a kategorórie, s ktorými prebiehajú platobné transakcie. 
+		Na základe získaných údajov umožňuje generovanie reportov a to vo viacerých variantoch: za určité obdobie, 
+		pre jednotlivé účty, pre každý subjekt a pod. 
+		Cieľom je zvýšiť prehľadnosť a uľahčiť prácu s veľkým počtom platobných transakcií na rôznych účtoch.</para>
+    </sect1>
+    <sect1>
+        <title>Popis mojej práce na projekte</title>
+        <sect2>
+			<sect3>
+            <title>Návrh GUI</title>
+            <para>Hlavnou úlohou pri návrhu grafického rozhrania bola čo najjednoduchšia spolupráca užívateľa s programom.
+				Snažil som sa o prehľadnosť a preto hlavným centrom celej aplikácie hlavný panel s tabuľkou platieb.
+				Nad touto tabuľkou si môže užívateľ vybrať, z ktorého účtu sa mu majú zobraziť platby, s akým subjektom bola
+				platba prepojená prípadne môže špecifikovať časové obdobie do ktorého majú zobrazené platby spadať.
+				Pod tabuľkou s platbami sa nachádzajú tlačidlá na správu platieb a tlačidlo na vygenerovanie reportu 
+				z aktuálne zobrazených platieb.
+				V hornom menu aplikácie je umožnená správa účtov, subjektov, kategórií a mien.
+				V spodnej časti sa nachádza stavový riadok, ktorý informuje o detailoch zobrazených údajov.							
+			</para>
+			</sect3>
+            <sect3>
+                <title>Prepojenie s back-endom.</title>
+                <para>Prepojenie s back-endom bolo viac menej bezproblemové. Avšak až pri implementácií GUI som zistil, 
+				že je potrebné dodatočne implementovať niektoré metódy v back-ende.
+				Dôležitou súčasťou pri prepojení bola aj ochrana nevalidných vstupov a k nim príslušné upozornenia pre 
+				užívateľa. Taktiež bolo nevyhnutné vyriešiť určité závislosti, napr. vymazanie účtu, ku ktorému existujú
+				nejaké platby a pod.				
+				</para>
+            </sect3>
+			<sect3>
+                <title>Jazyková podpora</title>
+                <para>
+				Primárny jazyk celej aplikácie je angličtina, taktiež HTML výstup je lokalizovaný do angličtiny.
+				Do aplikácie boli implementované Java Resource Bundles, to znamená, že celá aplikácia môže byť 
+				jednoducho a vo veľmi krátkom čase preložená do iného jazyka.
+				</para>
+            </sect3>
+            <sect3>
+                <title>Technické detaily</title>
+                <para>
+				 GUI bolo navrhnuté v NetBeans IDE 8.0.2 vo Swingu. 
+				 Externe bola použitá knižnica jcalendar-1.4.jar pre prácu s dátumami.
+				 Ikonky v aplikácii boli voľne stiahnuté z flaticon.com (Designed and developed by freepik.com).
+				</para>
+            </sect3>
+        </sect2>
+    </sect1>
+</article>

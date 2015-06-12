@@ -148,6 +148,7 @@ private AccountManager accountManager = new AccountManagerImpl();
         return result;
     }*/
     
+    @Override
     public String createXML(List<Payment> list) {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
         String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<payments>\n";
@@ -202,8 +203,8 @@ private AccountManager accountManager = new AccountManagerImpl();
         return result;
     }
     
-    public static void createHTML(String document, String output) 
-            throws TransformerConfigurationException, TransformerException {
+
+    public static void createHTML(String document, String output) throws TransformerConfigurationException, TransformerException {
         
         TransformerFactory tf = TransformerFactory.newInstance();
         

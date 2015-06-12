@@ -673,8 +673,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel41 = new javax.swing.JLabel();
         jButton25 = new javax.swing.JButton();
         jLabel67 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
         jChoosePayment = new javax.swing.JDialog();
         jLabel49 = new javax.swing.JLabel();
         jButton26 = new javax.swing.JButton();
@@ -1222,10 +1220,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel67.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/warning.png"));
         jUsedCategory.getContentPane().add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
-        jLabel43.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/payment.png"));
-
-        jLabel47.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/currency.png"));
-
         jChoosePayment.setMinimumSize(new java.awt.Dimension(400, 150));
         jChoosePayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1246,6 +1240,7 @@ public class MainFrame extends javax.swing.JFrame {
         jAbout.setTitle("About");
         jAbout.setMinimumSize(new java.awt.Dimension(520, 350));
 
+        jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -2100,11 +2095,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
