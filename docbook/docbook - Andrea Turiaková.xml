@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Správa o práci na projekte z predmetu PB138</title>
+        <orgname>Fakulta informatiky Masarykovej univerzity v Brne</orgname>
+        <author>
+            <personname>
+                <firstname>Andrea</firstname>
+                <surname>Turiaková, učo 422387</surname>
+            </personname>
+        </author>
+    </info>
+    <sect1>
+        <title>O projekte</title>
+        <para>Aplikácia spravuje jednotlivé účty a platby, ktoré jednoduchým spôsobom užívateľ pridáva do systému.
+		Taktiež zaznamenáva subjekty a kategorórie, s ktorými prebiehajú platobné transakcie. 
+		Na základe získaných údajov umožňuje generovanie reportov a to vo viacerých variantoch: za určité obdobie, 
+		pre jednotlivé účty, pre každý subjekt a pod. 
+		Cieľom je zvýšiť prehľadnosť a uľahčiť prácu s veľkým počtom platobných transakcií na rôznych účtoch.</para>
+    </sect1>
+    <sect1>
+        <title>Popis mojej práce na projekte</title>
+        <sect2>
+			<sect3>
+            <title>Unit Testing</title>
+            <para>Jednou z mojich úloh bolo implementovať jednotkové testy (unit tests) k niektorým triedam v backend-e. 
+				 Testy slúžili k odhaleniu prípadných chýb a nežiadúceho správania v implementáciach jednotlivých tried.
+				  Testy som sa snažila navrhnúť tak aby kontrolovali všetky okrajové situácie a skutočne potvrdzovali správnu funkcionalitu všetkých metód.							
+			</para>
+			</sect3>
+            <sect3>
+                <title>GUI - background thread</title>
+                <para>Ďalšou mojou úlohou bolo doimplementovanie vlákien do GUI. Keďže GUI pracuje len v jednom hlavnom vlákne aplikácia by bez vláken,
+				ktoré použijeme v pozadí na náročné operácie s databázou,bola príliš pomalá a ťažkopádna. Pre vytvorenie potrebných vlákien som použila SwingWorker.				
+				</para>
+            </sect3>
+			<sect3>
+            <title>Ostatná práca</title>
+            <para>Okrem vyššie spomenutého som sa podieľala na tvorbe dokumentu s XSLT transformáciou, časti dokumentácie, a ďalších menších ale potrebných úpravách v projekte. 							
+			</para>
+			</sect3>
+        </sect2>
+    </sect1>
+</article>
