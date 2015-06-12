@@ -781,9 +781,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel42.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/payment.png"));
         jAddPayment.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 90));
 
-        jInvalidPayment.setMaximumSize(new java.awt.Dimension(400, 150));
         jInvalidPayment.setMinimumSize(new java.awt.Dimension(400, 150));
-        jInvalidPayment.setPreferredSize(new java.awt.Dimension(400, 150));
         jInvalidPayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setText(localization.getString("non_valid_payment"));
@@ -850,9 +848,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jAddAccount.setTitle(localization.getString("createAccount"));
         jAddAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddAccount.setMaximumSize(new java.awt.Dimension(550, 270));
         jAddAccount.setMinimumSize(new java.awt.Dimension(550, 270));
-        jAddAccount.setPreferredSize(new java.awt.Dimension(550, 270));
         jAddAccount.setResizable(false);
         jAddAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -909,9 +905,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel46.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/currency.png"));
         jAddCurrency.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 80, 90));
 
-        jWantDeleteAccount.setMaximumSize(new java.awt.Dimension(550, 150));
         jWantDeleteAccount.setMinimumSize(new java.awt.Dimension(550, 150));
-        jWantDeleteAccount.setPreferredSize(new java.awt.Dimension(550, 150));
         jWantDeleteAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setText(localization.getString("wantDeleteAccount"));
@@ -946,9 +940,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jDeleteAccount.setTitle(localization.getString("deleteAccount"));
         jDeleteAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteAccount.setMaximumSize(new java.awt.Dimension(550, 150));
         jDeleteAccount.setMinimumSize(new java.awt.Dimension(550, 150));
-        jDeleteAccount.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new Vector<Account>(accountManager.findAllAccounts())));
@@ -970,9 +962,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jUpdateAccount.setTitle(localization.getString("updateAccount"));
         jUpdateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateAccount.setMaximumSize(new java.awt.Dimension(550, 350));
         jUpdateAccount.setMinimumSize(new java.awt.Dimension(550, 350));
-        jUpdateAccount.setPreferredSize(new java.awt.Dimension(550, 350));
         jUpdateAccount.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(accountManager.findAllAccounts())));
@@ -1017,9 +1007,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jDeleteCurrency.setTitle(localization.getString("deleteCurrency"));
         jDeleteCurrency.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteCurrency.setMaximumSize(new java.awt.Dimension(550, 150));
         jDeleteCurrency.setMinimumSize(new java.awt.Dimension(550, 150));
-        jDeleteCurrency.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteCurrency.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(currencyManager.findAllCurrency())));
@@ -1039,9 +1027,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel53.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
         jDeleteCurrency.getContentPane().add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
 
-        jUsedCurrency.setMaximumSize(new java.awt.Dimension(600, 150));
         jUsedCurrency.setMinimumSize(new java.awt.Dimension(600, 150));
-        jUsedCurrency.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedCurrency.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setText(localization.getString("usedCurrency"));
@@ -1060,9 +1046,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jAddSubject.setTitle(localization.getString("addSubject"));
         jAddSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddSubject.setMaximumSize(new java.awt.Dimension(550, 150));
         jAddSubject.setMinimumSize(new java.awt.Dimension(550, 150));
-        jAddSubject.setPreferredSize(new java.awt.Dimension(550, 150));
         jAddSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton18.setText(localization.getString("addSubject"));
@@ -1082,9 +1066,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jDeleteSubject.setTitle(localization.getString("deleteSubject"));
         jDeleteSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteSubject.setMaximumSize(new java.awt.Dimension(550, 150));
         jDeleteSubject.setMinimumSize(new java.awt.Dimension(550, 150));
-        jDeleteSubject.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(subjectManager.findAllSubjects())));
@@ -1104,10 +1086,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel55.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/remove.png"));
         jDeleteSubject.getContentPane().add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
 
-        jUsedSubject.setMaximumSize(new java.awt.Dimension(600, 150));
         jUsedSubject.setMinimumSize(new java.awt.Dimension(600, 150));
         jUsedSubject.setModal(true);
-        jUsedSubject.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel34.setText(localization.getString("usedSubject"));
@@ -1126,9 +1106,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jUpdateSubject.setTitle(localization.getString("updateSubject"));
         jUpdateSubject.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateSubject.setMaximumSize(new java.awt.Dimension(550, 220));
         jUpdateSubject.setMinimumSize(new java.awt.Dimension(550, 220));
-        jUpdateSubject.setPreferredSize(new java.awt.Dimension(550, 220));
         jUpdateSubject.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(subjectManager.findAllSubjects())));
@@ -1154,9 +1132,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jAddCategory.setTitle(localization.getString("addCategory"));
         jAddCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jAddCategory.setMaximumSize(new java.awt.Dimension(550, 150));
         jAddCategory.setMinimumSize(new java.awt.Dimension(550, 150));
-        jAddCategory.setPreferredSize(new java.awt.Dimension(550, 150));
         jAddCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton22.setText(localization.getString("addCategory"));
@@ -1182,9 +1158,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jUpdateCategory.setTitle(localization.getString("updateCategory"));
         jUpdateCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jUpdateCategory.setMaximumSize(new java.awt.Dimension(550, 200));
         jUpdateCategory.setMinimumSize(new java.awt.Dimension(550, 200));
-        jUpdateCategory.setPreferredSize(new java.awt.Dimension(550, 200));
         jUpdateCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(categoryManager.findAllCategory())));
@@ -1210,9 +1184,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jDeleteCategory.setTitle(localization.getString("deleteCategory"));
         jDeleteCategory.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDeleteCategory.setMaximumSize(new java.awt.Dimension(550, 150));
         jDeleteCategory.setMinimumSize(new java.awt.Dimension(550, 150));
-        jDeleteCategory.setPreferredSize(new java.awt.Dimension(550, 150));
         jDeleteCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox16.setModel(new javax.swing.DefaultComboBoxModel(new Vector<>(categoryManager.findAllCategory())));
@@ -1233,9 +1205,7 @@ public class MainFrame extends javax.swing.JFrame {
         jDeleteCategory.getContentPane().add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 80, 90));
 
         jUsedCategory.setLocationByPlatform(true);
-        jUsedCategory.setMaximumSize(new java.awt.Dimension(600, 150));
         jUsedCategory.setMinimumSize(new java.awt.Dimension(600, 150));
-        jUsedCategory.setPreferredSize(new java.awt.Dimension(600, 150));
         jUsedCategory.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel41.setText(localization.getString("usedCategory"));
@@ -1256,9 +1226,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel47.setIcon(new javax.swing.ImageIcon("src/main/java/GUI/img/currency.png"));
 
-        jChoosePayment.setMaximumSize(new java.awt.Dimension(400, 150));
         jChoosePayment.setMinimumSize(new java.awt.Dimension(400, 150));
-        jChoosePayment.setPreferredSize(new java.awt.Dimension(400, 150));
         jChoosePayment.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel49.setText(localization.getString("choose"));
@@ -1276,9 +1244,7 @@ public class MainFrame extends javax.swing.JFrame {
         jChoosePayment.getContentPane().add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 90));
 
         jAbout.setTitle("About");
-        jAbout.setMaximumSize(new java.awt.Dimension(520, 350));
         jAbout.setMinimumSize(new java.awt.Dimension(520, 350));
-        jAbout.setPreferredSize(new java.awt.Dimension(520, 350));
 
         jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea2.setColumns(20);
@@ -1547,6 +1513,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu9.setText("XML");
 
+        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem14.setText("Generate");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1559,6 +1526,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu1.setText("Help");
 
+        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem16.setText("About");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
