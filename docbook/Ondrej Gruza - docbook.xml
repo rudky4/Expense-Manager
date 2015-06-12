@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Expense-Manager</title>
+        <subtitle>Zpráva o práci na projeku z předmětu PB138</subtitle>
+        <orgname>Fakulta informatiky Masarykovy univerzity v Brně</orgname>
+        <author>
+            <personname>
+                <firstname>Ondřej</firstname>
+                <surname>Grůza, učo 421143</surname>
+            </personname>
+            <address>
+                <street>Botanická 68a</street>
+                <postcode>60200</postcode>
+                <city>Brno</city>
+                <country>Česká republika</country>
+            </address>
+            <email>421143@mail.muni.cz</email>
+        </author>
+    </info>
+    <sect1>
+        <title>O projekte</title>
+        <para>Aplikácia spravuje jednotlivé účty a platby, ktoré jednoduchým spôsobom užívateľ pridáva do systému.
+		Taktiež zaznamenáva subjekty a kategorórie, s ktorými prebiehajú platobné transakcie. 
+		Na základe získaných údajov umožňuje generovanie reportov a to vo viacerých variantoch: za určité obdobie, 
+		pre jednotlivé účty, pre každý subjekt a pod. 
+		Cieľom je zvýšiť prehľadnosť a uľahčiť prácu s veľkým počtom platobných transakcií na rôznych účtoch.</para>
+    </sect1>
+    <sect1>
+        <title>Popis mojí práce na projektu</title>
+        <sect2>
+			<sect3>
+            <title>Jednotkové testy</title>
+            <para>Vytvořil jsem jednotkové testy jUnit pro entitní manažery entit Account, Currency, Subject a pro třídu ExpenseManager, která zajišťuje komunikaci mezi GUI a entitami.							
+			</para>
+			</sect3>
+            <sect3>
+                <title>XML Schémeta</title>
+                <para>Protože náš projekt pracuje v rámci existDB s pěti různými XML soubory uchovávajícími data, btlo třeba ke každému vytvořit odpovídající soubor s XML Schématem. 
+                    To byl další z mých úkolů. Vyskytl se pouze drobný problém, při výpisu plateb jsme nahradili u každé platby ID účtu, subjektu a kategorie jejich názvem pro lepší srozumitelnost,
+                     proto bylo třeba udělat pro Payment dvě mírně odlišná schémata.		
+				</para>
+            </sect3>
+			<sect3>
+                <title>XSLT Transformace</title>
+                <para>XSLT Transformaci jsme použili, aby bylo možné exportovat platby momentálně zobrazené v GUI do HTML souboru. Vytvořil jsem XSL template a upravil metodu, 
+                    která z vybraných plateb generuje XML soubor, aby v HTML souboru zobrazovala i dodatečné informace jako počet plateb, celková bilance, nejvyšší příchozí a odchozí platba atd.
+				
+				</para>
+            </sect3>            
+        </sect2>
+    </sect1>
+</article>
