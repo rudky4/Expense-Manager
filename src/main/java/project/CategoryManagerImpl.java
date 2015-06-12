@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,9 +7,6 @@ package project;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -74,6 +71,7 @@ public class CategoryManagerImpl implements CategoryManager {
                 res = (XMLResource) col.createResource("categories.xml", "XMLResource");
                 res.setContent("<categories></categories>");
                 col.storeResource(res);
+                logger.log(Level.INFO, "category xml was created");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
@@ -105,6 +103,7 @@ public class CategoryManagerImpl implements CategoryManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO, "create category");
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating category", ex);
         }
@@ -144,7 +143,7 @@ public class CategoryManagerImpl implements CategoryManager {
 
     @Override
     public void deleteCategory(Long id) {
-        if(id==null){
+        if (id == null) {
             throw new IllegalArgumentException("id cannot be null");
         }
         try {
@@ -154,6 +153,7 @@ public class CategoryManagerImpl implements CategoryManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO, "delete category");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete category", ex);
         }
@@ -181,6 +181,7 @@ public class CategoryManagerImpl implements CategoryManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO, "update category");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when updating category", ex);
         }

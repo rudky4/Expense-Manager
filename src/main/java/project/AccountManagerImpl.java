@@ -49,15 +49,25 @@ public class AccountManagerImpl implements AccountManager {
     private Collection col = null;
     private XMLResource res = null;
 
+    /**
+     * Constructor
+     * @param URI
+     */
     public AccountManagerImpl(String URI) {
         this.URI = URI;
         createDatabase();
     }
 
-    public AccountManagerImpl() {
+    /**
+     * Constructor without parameter
+     */
+    public AccountManagerImpl() {   
         createDatabase();
     }
-
+    
+    /**
+     * function detects whether the xml file already created, if not, it creates
+     */
     private void createDatabase() {
         try {
             Class c = Class.forName(DRIVER);
@@ -74,12 +84,17 @@ public class AccountManagerImpl implements AccountManager {
                 res = (XMLResource) col.createResource("accounts.xml", "XMLResource");
                 res.setContent("<accounts></accounts>");
                 col.storeResource(res);
+                logger.log(Level.INFO,"account xml was created");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
         }
     }
 
+    /**
+     * function checks all parameters and create account
+     * @param account 
+     */
     @Override
     public void createAccount(Account account) {
         if (account.getId() != null) {
@@ -108,11 +123,16 @@ public class AccountManagerImpl implements AccountManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"create account");
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating account", ex);
         }
     }
-
+    
+    /**
+     * function checks last id in xml file and increments it
+     * @return id 
+     */
     private Long getId() {
         Long id = (long) 1;
         String idQuery = "max(for $account in doc(\"accounts.xml\")//account return $account/@id)";
@@ -136,7 +156,12 @@ public class AccountManagerImpl implements AccountManager {
         }
         return id;
     }
-
+    
+    /**
+     * function creates new node for xml file
+     * @param account
+     * @return node
+     */
     private String getNode(Account account) {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -149,6 +174,10 @@ public class AccountManagerImpl implements AccountManager {
         return node;
     }
 
+    /**
+     * function checks all parameter and updates account
+     * @param account 
+     */
     @Override
     public void updateAccount(Account account) {
         if (account.getId() == null) {
@@ -172,13 +201,21 @@ public class AccountManagerImpl implements AccountManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"update account");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when updating account", ex);
         }
     }
-
+    
+    /**
+     * function deletes account 
+     * @param id 
+     */
     @Override
     public void deleteAccount(Long id) {
+        if(id==null){
+            throw new IllegalArgumentException("id cannot be null");
+        }
         try {
             String query = "for $account in doc(\"accounts.xml\")//account[@id=\"" + id + "\"] return update delete $account";
             XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
@@ -186,37 +223,51 @@ public class AccountManagerImpl implements AccountManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"delete account");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete account", ex);
         }
     }
 
+    /**
+     * function finds accout by id
+     * @param id
+     * @return account
+     */
     @Override
-    public Account getAccountById(Long id) {
+    public Account getAccountById(Long id){
         if (id == null) {
             throw new IllegalArgumentException("");
         }
         String where = "where @id=" + Long.toString(id);
         List<Account> result = findAccountsBy(where);
         if (result.size() != 1) {
-            throw new IllegalArgumentException();
+       //     throw new DatabaseException();
         }
         return result.get(0);
     }
-
+    /**
+     * function finds accout by name
+     * @param name
+     * @return account
+     */
     @Override
-    public Account getAccountByName(String name) {
+    public Account getAccountByName(String name){
         if (name == null) {
             throw new IllegalArgumentException("");
         }
         String where = "where name=" + "\"" + name + "\"";
         List<Account> result = findAccountsBy(where);
         if (result.size() != 1) {
-            throw new IllegalArgumentException();
+            //throw new DatabaseException();
         }
         return result.get(0);
     }
-
+    
+    /**
+     * function finds all accounts
+     * @return List of account
+     */
     @Override
     public List<Account> findAllAccounts() {
         String where = "";
@@ -238,7 +289,11 @@ public class AccountManagerImpl implements AccountManager {
             ResourceIterator it = result.getIterator();
             while (it.hasMoreResources()) {
                 Resource resource = it.nextResource();
-                resultList.add(parseAccountFromXML(resource.getContent().toString()));
+                try {
+                    resultList.add(parseAccountFromXML(resource.getContent().toString()));
+                } catch (DatabaseException ex) {
+                    logger.log(Level.SEVERE,"Error when parse xml",ex);
+                }
             }
         } catch (XMLDBException ex) {
 
@@ -246,7 +301,7 @@ public class AccountManagerImpl implements AccountManager {
         return resultList;
     }
 
-    private Account parseAccountFromXML(String xml) {
+    private Account parseAccountFromXML(String xml) throws DatabaseException{
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         Account account = new Account();
@@ -263,21 +318,21 @@ public class AccountManagerImpl implements AccountManager {
 
                 a = parent.getElementsByTagName("name");
                 if (a.getLength() != 1) {
-                    // throw new Exception
+                     throw new DatabaseException();
                 }
                 Element el = (Element) a.item(0);
                 account.setName(el.getTextContent());
 
                 a = parent.getElementsByTagName("description");
                 if (a.getLength() != 1) {
-                    // throw new Exception
+                    throw new DatabaseException();
                 }
                 el = (Element) a.item(0);
                 account.setDescription(el.getTextContent());
 
                 a = parent.getElementsByTagName("creationDate");
                 if (a.getLength() != 1) {
-                    // throw new Exception
+                    throw new DatabaseException();
                 }
                 el = (Element) a.item(0);
                 DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
@@ -285,15 +340,15 @@ public class AccountManagerImpl implements AccountManager {
                 
                 a = parent.getElementsByTagName("currency");
                 if (a.getLength() != 1) {
-                    // throw new Exception
+                    throw new DatabaseException();
                 }
                 el = (Element) a.item(0);
                 account.setCurrency(el.getTextContent());
             } catch (SAXException | IOException | ParseException ex) {
-                Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE,"parse account",ex);
             }
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SubjectManagerImpl.class.getName()).log(Level.SEVERE, null, ex);
+           logger.log(Level.SEVERE,"parse account",ex);
         }
         return account;
     }

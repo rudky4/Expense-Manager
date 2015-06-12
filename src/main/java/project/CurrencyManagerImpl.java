@@ -7,10 +7,6 @@ package project;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,6 +71,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
                 res = (XMLResource) col.createResource("currencies.xml", "XMLResource");
                 res.setContent("<currencies></currencies>");
                 col.storeResource(res);
+                logger.log(Level.INFO,"currency xml was created");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
@@ -106,6 +103,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"create currency");
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating payment", ex);
         }
@@ -231,6 +229,7 @@ public class CurrencyManagerImpl implements CurrencyManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"delete currency");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete currency", ex);
         }

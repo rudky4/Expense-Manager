@@ -13,13 +13,28 @@ import java.util.List;
  */
 public interface CurrencyManager {
     
-    //public void updateCurrency(Currency currency);
-    
+    /**
+     * function checks all parameters and create account 
+     * @param currency
+     */
     public void createCurrency(Currency currency);
     
+    /**
+     * function deletes account 
+     * @param ccy 
+     */
     public void deleteCurrency(String ccy);
     
+    /**
+     * function finds all accounts
+     * @return List of currency
+     */
     public List<Currency> findAllCurrency();
     
+    /**
+     * function finds accout by id
+     * @param ccy
+     * @return currency
+     */
     public Currency getCurrencyByCcy(String ccy);
 }

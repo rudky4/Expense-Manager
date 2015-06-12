@@ -70,6 +70,7 @@ public class SubjectManagerImpl implements SubjectManager {
                 res = (XMLResource) col.createResource("subjects.xml", "XMLResource");
                 res.setContent("<subjects></subjects>");
                 col.storeResource(res);
+                logger.log(Level.INFO,"subject xml was created");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
@@ -90,14 +91,10 @@ public class SubjectManagerImpl implements SubjectManager {
             subject.setId(id);
             String node = getNode(subject);
             String query = "update insert " + node + " into doc(\"subjects.xml\")//subjects";
-//            XQueryService service = (XQueryService) col.getService("XQueryService", "1.0");
-//            service.declareVariable("document", "/db/subjects.xml");
-//            service.setProperty("indent", "yes");
-//            CompiledExpression compiled = service.compile(query);
-//            service.execute(compiled);
             XPathQueryService service = (XPathQueryService) col.getService("XPathQueryService", "1.0");
             service.setProperty("indent", "yes");
             service.query(query);
+            logger.log(Level.INFO,"create subject");
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating subject", ex);
         }
@@ -151,6 +148,7 @@ public class SubjectManagerImpl implements SubjectManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"update subject");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when updating subject", ex);
         }
@@ -165,6 +163,7 @@ public class SubjectManagerImpl implements SubjectManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"delete subject");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete subject", ex);
         }

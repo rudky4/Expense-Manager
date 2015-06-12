@@ -76,6 +76,7 @@ public class PaymentManagerImpl implements PaymentManager {
                 res = (XMLResource) col.createResource("payments.xml", "XMLResource");
                 res.setContent("<payments></payments>");
                 col.storeResource(res);
+                logger.log(Level.INFO,"payment xml was created");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating databse", ex);
@@ -112,9 +113,7 @@ public class PaymentManagerImpl implements PaymentManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
-           // XPathQueryService service = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-            // service.setProperty("indent", "yes");
-            // service.query(query);
+            logger.log(Level.INFO,"create payment");
         } catch (NumberFormatException | XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when creating payment", ex);
         }
@@ -172,6 +171,7 @@ public class PaymentManagerImpl implements PaymentManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"update payment");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when updating payment", ex);
         }
@@ -189,6 +189,7 @@ public class PaymentManagerImpl implements PaymentManager {
             service.setProperty("indent", "yes");
             CompiledExpression compiled = service.compile(query);
             service.execute(compiled);
+            logger.log(Level.INFO,"delete payment");
         } catch (XMLDBException ex) {
             logger.log(Level.SEVERE, "Error when delete payment", ex);
         }

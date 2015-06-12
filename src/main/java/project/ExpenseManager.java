@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -74,7 +74,7 @@ public interface ExpenseManager {
     /**
      * Returns all payments for selected subject
      * 
-     * @param subjectId
+     * @param accountId
      * @return list of payments
      */
     public List<Payment> getAllPaymentsBySubject(Long accountId);
@@ -82,7 +82,7 @@ public interface ExpenseManager {
     /**
      * Returns all payments for selected subject from selected period of time
      * 
-     * @param subjectId
+     * @param accountId
      * @param startDate
      * @param endDate
      * @return
