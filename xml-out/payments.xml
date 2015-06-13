@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payments>
+	<payment id="1">
+		<description>Dinner</description>
+		<date>2015-06-05</date>
+		<amount>-119.00</amount>
+		<account-name>School</account-name>
+		<subject-name>Billa</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="2">
+		<description>Trip to Prague</description>
+		<date>2015-06-04</date>
+		<amount>-550.00</amount>
+		<account-name>School</account-name>
+		<subject-name>Train</subject-name>
+		<category-name>Transport</category-name>
+		</payment>	<payment id="3">
+		<description>Gift from Grandma</description>
+		<date>2014-06-20</date>
+		<amount>50.00</amount>
+		<account-name>Slovak account</account-name>
+		<subject-name>Family</subject-name>
+		<category-name>Transport</category-name>
+		</payment>	<payment id="4">
+		<description>Smartwatch SONY</description>
+		<date>2015-03-11</date>
+		<amount>-69.99</amount>
+		<account-name>Slovak account</account-name>
+		<subject-name>Alza</subject-name>
+		<category-name>Transport</category-name>
+		</payment>	<payment id="5">
+		<description>Money to ISIC</description>
+		<date>2015-05-07</date>
+		<amount>-200.00</amount>
+		<account-name>School</account-name>
+		<subject-name>SKM</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="6">
+		<description>From parents to studies</description>
+		<date>2015-04-01</date>
+		<amount>7500.00</amount>
+		<account-name>School</account-name>
+		<subject-name>Family</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="7">
+		<description>From parents to studies</description>
+		<date>2015-05-01</date>
+		<amount>7000.00</amount>
+		<account-name>School</account-name>
+		<subject-name>Family</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="8">
+		<description>Saturday shopping</description>
+		<date>2015-04-18</date>
+		<amount>-442.50</amount>
+		<account-name>School</account-name>
+		<subject-name>Tesco</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="9">
+		<description>T-shirt</description>
+		<date>2015-05-14</date>
+		<amount>-289.00</amount>
+		<account-name>School</account-name>
+		<subject-name>Reserved</subject-name>
+		<category-name>Clothes</category-name>
+		</payment>	<payment id="10">
+		<description>PartyTime</description>
+		<date>2015-03-03</date>
+		<amount>-19.86</amount>
+		<account-name>Slovak account</account-name>
+		<subject-name>Na Stojaka</subject-name>
+		<category-name>Fun</category-name>
+		</payment>	<payment id="11">
+		<description>Saved for Trip</description>
+		<date>2014-06-28</date>
+		<amount>2800.00</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>Other</subject-name>
+		<category-name>Other</category-name>
+		</payment>	<payment id="12">
+		<description>Plane ticket</description>
+		<date>2014-08-23</date>
+		<amount>-986.00</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>Other</subject-name>
+		<category-name>Transport</category-name>
+		</payment>	<payment id="13">
+		<description>Hotel</description>
+		<date>2014-09-09</date>
+		<amount>-347.58</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>Other</subject-name>
+		<category-name>Other</category-name>
+		</payment>	<payment id="14">
+		<description>Bus to NY</description>
+		<date>2014-09-11</date>
+		<amount>-56.90</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>Train</subject-name>
+		<category-name>Transport</category-name>
+		</payment>	<payment id="15">
+		<description>Lunch with Abby</description>
+		<date>2014-09-10</date>
+		<amount>-78.50</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>Other</subject-name>
+		<category-name>Food</category-name>
+		</payment>	<payment id="16">
+		<description>Quick Breakfast</description>
+		<date>2014-09-11</date>
+		<amount>-2.99</amount>
+		<account-name>Trip to US</account-name>
+		<subject-name>McDonald</subject-name>
+		<category-name>Food</category-name>
+		</payment><count>16</count>
+<sum>14187.68</sum>
+<incomingCount>4</incomingCount>
+<outgoingCount>12</outgoingCount>
+<incomingSum>17350.00</incomingSum>
+<outgoingSum>-3162.32</outgoingSum>
+<highestIncoming>7500.00</highestIncoming>
+<highestOutgoing>-986.00</highestOutgoing>
+</payments>
